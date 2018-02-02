@@ -1,5 +1,5 @@
 package com.gg.main;
-import com.gg.comportement.*;
+import com.gg.joueurs.*;
 public class RecherchePlusMoins extends ModeDeJeu {
 
 

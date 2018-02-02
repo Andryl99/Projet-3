@@ -1,8 +1,9 @@
 package com.gg.main;
 
 import java.util.InputMismatchException;
-import com.gg.comportement.*;
 import java.util.Scanner;
+
+import com.gg.joueurs.*;
 
 public class Menu {
 
@@ -61,7 +62,7 @@ public class Menu {
 			//
 			// Création du jeu
 			
-
+			
 			//
 			// Menu apres jeu
 			do {
@@ -106,11 +107,16 @@ public class Menu {
 
 	private ModeDeJeu creerJeu(int choixJeu, int choixMode) {
 		if (choixJeu == 1) {
-			Player defenseur  = new HumanPlayer();
-			Player attaquant  = new AIPlayer(4);
-			return new RecherchePlusMoins(config.getNbCoups(), config.getNbCases(), attaquant, defenseur);
+			Player joueur1  = new HumanPlayer();
+			Player joueur2 = new AIPlayer(config.getNbCases());
+			if (choixMode == 1) {
+				return new RecherchePlusMoins(config.getNbCoups(), config.getNbCases(), joueur1, joueur2);
+			}
+			else if (choixMode == 2) {
+				return new RecherchePlusMoins(config.getNbCoups(), config.getNbCases(), joueur2, joueur1);
+			}
 		} else if (choixJeu == 2) {
-			System.out.println("Mastermind est toujours en développement");
+			System.out.println("Mastermind est toujours en développement !");
 			return null;
 		}
 		return null;
@@ -129,5 +135,4 @@ public class Menu {
 		}
 		return choix;
 	}
-
 }

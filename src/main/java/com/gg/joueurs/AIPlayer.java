@@ -1,6 +1,5 @@
-package com.gg.comportement;
+package com.gg.joueurs;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class AIPlayer extends Player {
@@ -8,14 +7,14 @@ public class AIPlayer extends Player {
 	private int[] memLastPlayed;
 	private int[] memMin;
 	private int[] memMax;
-	private int[] propositionTab;
+	// private int[] propositionTab;
 	Random rand = new Random();
-	
+
 	public AIPlayer(int nbCases) {
 		this.memLastPlayed = new int[nbCases];
 		this.memMin = new int[nbCases];
 		this.memMax = new int[nbCases];
-		this.propositionTab = new int[nbCases];
+		// this.propositionTab = new int[nbCases];
 
 		for (int i = 0; i < nbCases; i++) {
 			memMin[i] = 1;
@@ -25,7 +24,7 @@ public class AIPlayer extends Player {
 
 	@Override
 	public String choisitSolution(int nbCases) {
-		
+
 		int min = 1;
 		int max = 9;
 		int nbRandom;
@@ -99,7 +98,7 @@ public class AIPlayer extends Player {
 		if (correction == "") {
 			int min = 1;
 			int max = 9;
-			
+
 			for (int i = 0; i < nbCases; i++) {
 				memLastPlayed[i] = rand.nextInt(max - min + 1) + min;
 				proposition += memLastPlayed[i];
@@ -111,31 +110,26 @@ public class AIPlayer extends Player {
 		for (int i = 0; i < nbCases; i++) {
 
 			if (correction.charAt(i) == '+') {
-
 				memMin[i] = memLastPlayed[i];
-
-				//if (((memMax[i] + memLastPlayed[i]) / 2) != memLastPlayed[i]) // si l'interval existe
-				if (((memMax[i] - memLastPlayed[i] !=0)) && ((memMax[i] - memLastPlayed[i]) != 1 )) // si l'interval existe
+				// if (((memMax[i] + memLastPlayed[i]) / 2) != memLastPlayed[i]) // si
+				// l'interval existe
+				if (((memMax[i] - memLastPlayed[i] != 0)) && ((memMax[i] - memLastPlayed[i]) != 1)) // si l'interval
+																									// existe
 				{
-
-					propositionTab[i] = (memMax[i] + memLastPlayed[i]) / 2;
-					memLastPlayed[i] = propositionTab[i];
+					memLastPlayed[i] = (memMax[i] + memLastPlayed[i]) / 2;
 				} else {
-					propositionTab[i] = memLastPlayed[i] + 1;
-					memLastPlayed[i] = propositionTab[i];
+					memLastPlayed[i] = memLastPlayed[i] + 1;
 				}
 
 			} else if (correction.charAt(i) == '-') {
-
 				memMax[i] = memLastPlayed[i];
-				propositionTab[i] = (memMin[i] + memLastPlayed[i]) / 2;
-				memLastPlayed[i] = propositionTab[i];
+				memLastPlayed[i] = (memMin[i] + memLastPlayed[i]) / 2;
 
 			} else if (correction.charAt(i) == '=') {
-				propositionTab[i] = memLastPlayed[i];
+				// rien ne se passe
 			}
 
-			proposition += propositionTab[i];
+			proposition += memLastPlayed[i];
 		}
 		return proposition;
 	}
