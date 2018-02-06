@@ -1,12 +1,12 @@
 package com.gg.main;
 
-public class Configuration {
+public class ConfigurationClass {
 	private int nbCoups;
 	private int nbCases;
 	private int nbCouleurs;
 	private boolean devMod;
 	
-	public Configuration() {
+	public ConfigurationClass() {
 		setNbCoups(4);
 		setNbCases(4);
 		setNbCouleurs(4);
@@ -15,7 +15,7 @@ public class Configuration {
 	
 	//
 	// Au final on remplacera ce constructeur ainsi que les setters par une lecture du fichier de configuration;
-	public Configuration(int nbCoups, int nbCases, int nbCouleurs, boolean devMod) {
+	public ConfigurationClass(int nbCoups, int nbCases, int nbCouleurs, boolean devMod) {
 		setNbCoups(nbCoups);
 		setNbCases(nbCases);
 		setNbCouleurs(nbCouleurs);

@@ -1,5 +1,5 @@
 package com.gg.main;
 
-public enum EtatFinDeManche {
+public enum EndGameState {
 	ATTAQUANTGAGNE, DEFENSEURGAGNE, AUCUNGAGNANT
 }

@@ -22,7 +22,7 @@ public class Main {
 		//
 		// TODO pour l'instant le devmod n'est pas implement�
 		Menu menu = new Menu();
-		menu.lancerMenu();
+		menu.runMenu();
 	}
 }
 

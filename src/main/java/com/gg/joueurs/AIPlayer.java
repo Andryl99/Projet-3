@@ -4,17 +4,15 @@ import java.util.Random;
 
 public class AIPlayer extends Player {
 
-	private int[] memLastPlayed;
+	private int[] currentTab;
 	private int[] memMin;
 	private int[] memMax;
-	// private int[] propositionTab;
 	Random rand = new Random();
 
 	public AIPlayer(int nbCases) {
-		this.memLastPlayed = new int[nbCases];
+		this.currentTab = new int[nbCases];
 		this.memMin = new int[nbCases];
 		this.memMax = new int[nbCases];
-		// this.propositionTab = new int[nbCases];
 
 		for (int i = 0; i < nbCases; i++) {
 			memMin[i] = 1;
@@ -23,7 +21,7 @@ public class AIPlayer extends Player {
 	}
 
 	@Override
-	public String choisitSolution(int nbCases) {
+	public String selectSolution(int nbCases) {
 
 		int min = 1;
 		int max = 9;
@@ -39,7 +37,7 @@ public class AIPlayer extends Player {
 	}
 
 	@Override
-	public String donneReponse(String proposition, String solution, int nbCases) {
+	public String giveAnswer(String proposition, String solution, int nbCases) {
 
 		int digitProp;
 		int digitSol;
@@ -67,41 +65,16 @@ public class AIPlayer extends Player {
 	}
 
 	@Override
-	// public String joueUnCoup(String reponse, String derniereProposition, int
-	// nbCases) {
-	//
-	// String proposition = "";
-	// if (reponse == "") {
-	// for (int i = 0; i < nbCases; i++)
-	// proposition += "5";
-	// return proposition;
-	// }
-	// //
-	// // J'ai r�cup�r� la derniere combinaison ce qui donne une IA simple qui
-	// ajoute
-	// // ou soustraie 1 au dernier coup pour s'approcher de la solution
-	// for (int i = 0; i < nbCases; i++) {
-	//
-	// if (reponse.charAt(i) == '+') {
-	// proposition += (char) (derniereProposition.charAt(i) + 1);
-	// } else if (reponse.charAt(i) == '-') {
-	// proposition += (char) (derniereProposition.charAt(i) - 1);
-	// } else if (reponse.charAt(i) == '=') {
-	// proposition += derniereProposition.charAt(i);
-	// }
-	// }
-	// return proposition;
-	// }
-	public String joueUnCoup(String correction, String derniereProposition, int nbCases) {
+	public String play(String correction, int nbCases) {
 
 		String proposition = "";
-		if (correction == "") {
+		if (correction.equals("")) {
 			int min = 1;
 			int max = 9;
 
 			for (int i = 0; i < nbCases; i++) {
-				memLastPlayed[i] = rand.nextInt(max - min + 1) + min;
-				proposition += memLastPlayed[i];
+				currentTab[i] = rand.nextInt(max - min + 1) + min;
+				proposition += currentTab[i];
 			}
 
 			return proposition;
@@ -110,26 +83,26 @@ public class AIPlayer extends Player {
 		for (int i = 0; i < nbCases; i++) {
 
 			if (correction.charAt(i) == '+') {
-				memMin[i] = memLastPlayed[i];
+				memMin[i] = currentTab[i];
 				// if (((memMax[i] + memLastPlayed[i]) / 2) != memLastPlayed[i]) // si
 				// l'interval existe
-				if (((memMax[i] - memLastPlayed[i] != 0)) && ((memMax[i] - memLastPlayed[i]) != 1)) // si l'interval
+				if (((memMax[i] - currentTab[i] != 0)) && ((memMax[i] - currentTab[i]) != 1)) // si l'interval
 																									// existe
 				{
-					memLastPlayed[i] = (memMax[i] + memLastPlayed[i]) / 2;
+					currentTab[i] = (memMax[i] + currentTab[i]) / 2;
 				} else {
-					memLastPlayed[i] = memLastPlayed[i] + 1;
+					currentTab[i] = currentTab[i] + 1;
 				}
 
 			} else if (correction.charAt(i) == '-') {
-				memMax[i] = memLastPlayed[i];
-				memLastPlayed[i] = (memMin[i] + memLastPlayed[i]) / 2;
+				memMax[i] = currentTab[i];
+				currentTab[i] = (memMin[i] + currentTab[i]) / 2;
 
 			} else if (correction.charAt(i) == '=') {
 				// rien ne se passe
 			}
 
-			proposition += memLastPlayed[i];
+			proposition += currentTab[i];
 		}
 		return proposition;
 	}

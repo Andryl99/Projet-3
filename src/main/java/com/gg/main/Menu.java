@@ -8,121 +8,91 @@ import com.gg.joueurs.*;
 public class Menu {
 
 	// Consultation du fichier config, PEUT ETRE mieux dans main
-	private Configuration config;
+	private ConfigurationClass config;
 
 	public Menu() {
-		this.config = new Configuration(6, 4, 5, false);
+		this.config = new ConfigurationClass(6, 4, 5, false);
 	}
 
-	public void lancerMenu() {
+	public void runMenu() {
 
-		int choixJeu;
-		int choixMode;
-		int choixFinal;
+		int gameChoice;
+		int modChoice;
+		int endGameChoice;
 		boolean exit = false;
 
 		while (!exit) {
 
-			choixJeu = -1;
-			choixMode = -1;
-			choixFinal = -1;
+			gameChoice = -1;
+			modChoice = -1;
+			endGameChoice = -1;
+			displayMenuHeader();
 
-			System.out.println("multi-jeux");
-			System.out.println("--------------------");
-
-			//
 			// Choix du jeu
 			do {
+				displayGameList();
+				gameChoice = this.intInput();
 
-				System.out.println("Choisissez un jeu");
-				System.out.println("1 - RecherchePM");
-				System.out.println("2 - Mastermind");
+			} while (gameChoice < 1 || gameChoice > 2);
 
-				choixJeu = this.saisieInt();
-
-			} while (choixJeu < 1 || choixJeu > 2);
-
-			System.out.println("--------------------");
-
-			//
 			// Choix du mode
 			do {
+				displayModList();
+				modChoice = this.intInput();
 
-				System.out.println("Choisissez un mode");
-				System.out.println("1 - Challenger");
-				System.out.println("2 - Defenseur");
-				System.out.println("3 - Duel");
+			} while (modChoice != 1 && modChoice != 2 && modChoice != 3);
 
-				choixMode = this.saisieInt();
-
-			} while (choixMode != 1 && choixMode != 2 && choixMode != 3);
-
-			System.out.println("--------------------");
-
-			//
 			// Création du jeu
-			
-			
-			//
-			// Menu apres jeu
 			do {
-				
-				ModeDeJeu jeu = this.creerJeu(choixJeu, choixMode);
-				jeu.defenseurChoisiSolution();
-				
-				//
+				Game game = this.createGame(gameChoice, modChoice);
+				game.defensorSelectSolution();
+
 				// Boucle du jeu
 				do {
-					jeu.attaquantJoue();
-					jeu.defenseurRepond();
-					if (jeu.tourSuivant().equals(EtatFinDeManche.AUCUNGAGNANT)) {
+					game.attackerPlay();
+					game.defensorAnswer();
+					if (game.nextTurn().equals(EndGameState.AUCUNGAGNANT)) {
 						continue;
-					} else if (jeu.tourSuivant().equals(EtatFinDeManche.ATTAQUANTGAGNE)) {
+					} else if (game.nextTurn().equals(EndGameState.ATTAQUANTGAGNE)) {
 						System.out.println("Attaquant gagne!");
 						break;
-					} else if (jeu.tourSuivant().equals(EtatFinDeManche.DEFENSEURGAGNE)) {
+					} else if (game.nextTurn().equals(EndGameState.DEFENSEURGAGNE)) {
 						System.out.println("Défenseur gagne!");
 						break;
 					}
 				} while (true);
 
-				System.out.println("--------------------");
-				System.out.println("Voulez vous :");
-				System.out.println("1 - Rejouer");
-				System.out.println("2 - Retourner au menu");
-				System.out.println("3 - Quitter l'application ?");
+				displayEndGameMenu();
+				endGameChoice = this.intInput();
 
-				choixFinal = this.saisieInt();
-
-				if (choixFinal == 1) {
+				if (endGameChoice == 1) {
 					continue;
-				} else if (choixFinal == 2) {
-				} else if (choixFinal == 3) {
+				} else if (endGameChoice == 2) {
+				} else if (endGameChoice == 3) {
 					exit = true;
 				}
 
-			} while (choixFinal != 2 && choixFinal != 3);
+			} while (endGameChoice != 2 && endGameChoice != 3);
 		}
 	}
 
-	private ModeDeJeu creerJeu(int choixJeu, int choixMode) {
-		if (choixJeu == 1) {
-			Player joueur1  = new HumanPlayer();
-			Player joueur2 = new AIPlayer(config.getNbCases());
-			if (choixMode == 1) {
-				return new RecherchePlusMoins(config.getNbCoups(), config.getNbCases(), joueur1, joueur2);
+	private Game createGame(int gameChoice, int modChoice) {
+		if (gameChoice == 1) {
+			Player player1 = new HumanPlayer();
+			Player player2 = new AIPlayer(config.getNbCases());
+			if (modChoice == 1) {
+				return new MoreLessGame(config.getNbCoups(), config.getNbCases(), player1, player2);
+			} else if (modChoice == 2) {
+				return new MoreLessGame(config.getNbCoups(), config.getNbCases(), player2, player1);
 			}
-			else if (choixMode == 2) {
-				return new RecherchePlusMoins(config.getNbCoups(), config.getNbCases(), joueur2, joueur1);
-			}
-		} else if (choixJeu == 2) {
+		} else if (gameChoice == 2) {
 			System.out.println("Mastermind est toujours en développement !");
 			return null;
 		}
 		return null;
 	}
 
-	public int saisieInt() {
+	public int intInput() {
 
 		int choix = -1;
 		System.out.print("Choix : ");
@@ -134,5 +104,30 @@ public class Menu {
 			System.out.println("Erreur de saisie, recommencez");
 		}
 		return choix;
+	}
+	
+	public void displayMenuHeader() {
+		System.out.println("multi-jeux");
+	}
+	
+	public void displayGameList() {
+		System.out.println("--------------------");
+		System.out.println("Choisissez un jeu");
+		System.out.println("1 - RecherchePM");
+		System.out.println("2 - Mastermind");
+	}
+	public void displayModList() {
+		System.out.println("--------------------");
+		System.out.println("Choisissez un mode");
+		System.out.println("1 - Challenger");
+		System.out.println("2 - Defenseur");
+		System.out.println("3 - Duel");
+	}
+	public void displayEndGameMenu() {
+		System.out.println("--------------------");
+		System.out.println("Voulez vous :");
+		System.out.println("1 - Rejouer");
+		System.out.println("2 - Retourner au menu");
+		System.out.println("3 - Quitter l'application ?");
 	}
 }

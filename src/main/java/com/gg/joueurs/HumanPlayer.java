@@ -6,27 +6,13 @@ import com.gg.main.Regex;
 public class HumanPlayer extends Player {
 
 	@Override
-	public String choisitSolution(int nbCases) {
-		String choixCombinaison = "";
+	public String selectSolution(int nbCases) {
 		System.out.println("Entrez une combinaison de " + nbCases + " chiffres à trouver.");
-		
-		while (true) {
-			try {
-				choixCombinaison = scanner.nextLine();
-			} catch (InputMismatchException e) {
-				System.out.println("Erreur de saisie, recommencez :");
-			}
-			if (Regex.estCombinaisonValide(choixCombinaison, nbCases)) {
-				break;
-			} else {
-				System.out.println("Veillez saisir un entier à " + nbCases + " chiffre compris entre 1 et 9");
-			}
-		}
-		return choixCombinaison;
+		return this.inputErrorCheck(nbCases);
 	}
 
 	@Override
-	public String donneReponse(String proposition, String solution, int nbCases) {
+	public String giveAnswer(String proposition, String solution, int nbCases) {
 		String reponse;
 		String verification = "";
 		int digitProp;
@@ -48,7 +34,7 @@ public class HumanPlayer extends Player {
 			else if (digitProp > digitSol)
 				verification += "-";
 		}
-	
+
 		System.out.println("Corrigez la proposition de l'attaquant : " + proposition + "\t Solution : " + solution);
 
 		while (true) {
@@ -58,33 +44,36 @@ public class HumanPlayer extends Player {
 			} catch (InputMismatchException e) {
 				System.out.println("Erreur de saisie, recommencez");
 			}
-			if	(!Regex.estCorrectionValide(reponse, nbCases)){
+			if	(!Regex.isValidCorrection(reponse, nbCases)){
 				System.out.println("Saisie incorrecte, recommencez");
 				continue; // Si la saisie ne match pas l'expression reguliere, on ne teste meme pas la condition suivante
 			}
 			if (reponse.equals(verification)) {	break;} 
 			else { System.out.println("Erreur de correction");}
-
 		}
 		return reponse;
 	}
 
 	@Override
-	public String joueUnCoup(String reponse, String derniereProposition, int nbCases) {
-		String choixCombinaison = "";
-		
+	public String play(String reponse, int nbCases) {
+		return this.inputErrorCheck(nbCases);
+	}
+	
+	
+	public String inputErrorCheck(int nbCases) {
+		String str = "";
 		while (true) {
 			try {
-				choixCombinaison = scanner.nextLine();
+				str = scanner.nextLine();
 			} catch (InputMismatchException e) {
 				System.out.println("Erreur de saisie, recommencez :");
 			}
-			if (Regex.estCombinaisonValide(choixCombinaison, nbCases)) {
+			if (Regex.isValidCombination(str, nbCases)) {
 				break;
 			} else {
 				System.out.println("Veillez saisir un entier à " + nbCases + " chiffre compris entre 1 et 9");
 			}
 		}
-		return choixCombinaison;
+		return str;
 	}
 }
