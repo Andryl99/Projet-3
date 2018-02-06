@@ -84,26 +84,22 @@ public class AIPlayer extends Player {
 
 			if (correction.charAt(i) == '+') {
 				memMin[i] = currentTab[i];
-				// if (((memMax[i] + memLastPlayed[i]) / 2) != memLastPlayed[i]) // si
-				// l'interval existe
-				if (((memMax[i] - currentTab[i] != 0)) && ((memMax[i] - currentTab[i]) != 1)) // si l'interval
-																									// existe
+				// if (((memMax[i] + memLastPlayed[i]) / 2) != memLastPlayed[i])
+				if ((memMax[i] - currentTab[i]) > 1 ) // si l'interval existe
 				{
 					currentTab[i] = (memMax[i] + currentTab[i]) / 2;
 				} else {
-					currentTab[i] = currentTab[i] + 1;
+					currentTab[i]++ ;
 				}
 
 			} else if (correction.charAt(i) == '-') {
 				memMax[i] = currentTab[i];
 				currentTab[i] = (memMin[i] + currentTab[i]) / 2;
-
-			} else if (correction.charAt(i) == '=') {
-				// rien ne se passe
-			}
-
+				}
 			proposition += currentTab[i];
+			
 		}
 		return proposition;
 	}
 }
+

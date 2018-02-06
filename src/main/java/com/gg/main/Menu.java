@@ -15,7 +15,6 @@ public class Menu {
 	}
 
 	public void runMenu() {
-
 		int gameChoice;
 		int modChoice;
 		int endGameChoice;
@@ -93,7 +92,6 @@ public class Menu {
 	}
 
 	public int intInput() {
-
 		int choix = -1;
 		System.out.print("Choix : ");
 		Scanner scanner = new Scanner(System.in);

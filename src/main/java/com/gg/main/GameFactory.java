@@ -17,6 +17,9 @@ public class GameFactory {
 		case 2 :
 			return new Mastermind(config.getNbCoups(), config.getNbCases(), config.getNbCouleurs(), player1, player2);
 			break;
+		default :
+			return null;
+			break;
 		}
 	}
 }
