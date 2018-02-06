@@ -6,13 +6,13 @@ import com.gg.main.Regex;
 public class HumanPlayer extends Player {
 
 	@Override
-	public String selectSolution(int nbCases) {
-		System.out.println("Entrez une combinaison de " + nbCases + " chiffres à trouver.");
-		return this.inputErrorCheck(nbCases);
+	public String selectSolution(int solutionLength) {
+		System.out.println("Entrez une combinaison de " + solutionLength + " chiffres à trouver.");
+		return this.inputErrorCheck(solutionLength);
 	}
 
 	@Override
-	public String giveAnswer(String proposition, String solution, int nbCases) {
+	public String giveAnswer(String proposition, String solution, int solutionLength) {
 		String reponse;
 		String verification = "";
 		int digitProp;
@@ -22,7 +22,7 @@ public class HumanPlayer extends Player {
 
 		// On compare les combinaison et determine le r�sultat
 		// Ici les param�tre de l'application change la borne sup;
-		for (int i = 0; i < nbCases; i++) {
+		for (int i = 0; i < solutionLength; i++) {
 
 			digitProp = Integer.parseInt(String.valueOf(proposition.charAt(i)));
 			digitSol = Integer.parseInt(String.valueOf(solution.charAt(i)));
@@ -44,7 +44,7 @@ public class HumanPlayer extends Player {
 			} catch (InputMismatchException e) {
 				System.out.println("Erreur de saisie, recommencez");
 			}
-			if	(!Regex.isValidCorrection(reponse, nbCases)){
+			if	(!Regex.isValidCorrection(reponse, solutionLength)){
 				System.out.println("Saisie incorrecte, recommencez");
 				continue; // Si la saisie ne match pas l'expression reguliere, on ne teste meme pas la condition suivante
 			}
@@ -55,12 +55,12 @@ public class HumanPlayer extends Player {
 	}
 
 	@Override
-	public String play(String reponse, int nbCases) {
-		return this.inputErrorCheck(nbCases);
+	public String play(String reponse, int solutionLength) {
+		return this.inputErrorCheck(solutionLength);
 	}
 	
 	
-	public String inputErrorCheck(int nbCases) {
+	public String inputErrorCheck(int solutionLength) {
 		String str = "";
 		while (true) {
 			try {
@@ -68,10 +68,10 @@ public class HumanPlayer extends Player {
 			} catch (InputMismatchException e) {
 				System.out.println("Erreur de saisie, recommencez :");
 			}
-			if (Regex.isValidCombination(str, nbCases)) {
+			if (Regex.isValidCombination(str, solutionLength)) {
 				break;
 			} else {
-				System.out.println("Veillez saisir un entier à " + nbCases + " chiffre compris entre 1 et 9");
+				System.out.println("Veillez saisir un entier à " + solutionLength + " chiffre compris entre 1 et 9");
 			}
 		}
 		return str;

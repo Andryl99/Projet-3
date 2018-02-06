@@ -4,21 +4,21 @@ public class Main {
 
 	public static void main(String[] args) {
 		boolean devMod = false;
-		String premierArg;
+		String firstArg;
 
 		
 		if (args.length > 0)
 		try {
 			//
 			// On recupere la valeur du premier arguments
-			premierArg = args[0];
+			firstArg = args[0];
 			
 			// 
 			// Si cet argument est "dev" devMod est vrai
-			if (premierArg.equals("dev"))
+			if (firstArg.equals("dev"))
 				devMod = true;
 			
-		} catch ( Exception e) { }
+		} catch (Exception e) { }
 		//
 		// TODO pour l'instant le devmod n'est pas implement�
 		Menu menu = new Menu();

@@ -4,8 +4,8 @@ import com.gg.joueurs.Player;
 
 public class Mastermind extends Game {
 
-	public Mastermind(int nbCoups, int nbCases, int nbCouleurs, Player attacker, Player defensor) {
-		super(nbCoups, nbCases, attacker, defensor);
+	public Mastermind(int nbTurns, int solutionLength, int nbColors, Player attacker, Player defensor) {
+		super(nbTurns, solutionLength, attacker, defensor);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -29,5 +29,6 @@ public class Mastermind extends Game {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	
 }

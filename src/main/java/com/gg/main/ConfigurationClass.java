@@ -1,44 +1,44 @@
 package com.gg.main;
 
 public class ConfigurationClass {
-	private int nbCoups;
-	private int nbCases;
-	private int nbCouleurs;
+	private int nbTurns;
+	private int solutionLength;
+	private int nbColors;
 	private boolean devMod;
 	
 	public ConfigurationClass() {
-		setNbCoups(4);
-		setNbCases(4);
-		setNbCouleurs(4);
+		setNbTurns(4);
+		setSolutionLength(4);
+		setNbColors(4);
 		this.devMod = false;
 	}
 	
 	//
 	// Au final on remplacera ce constructeur ainsi que les setters par une lecture du fichier de configuration;
-	public ConfigurationClass(int nbCoups, int nbCases, int nbCouleurs, boolean devMod) {
-		setNbCoups(nbCoups);
-		setNbCases(nbCases);
-		setNbCouleurs(nbCouleurs);
+	public ConfigurationClass(int nbTurns, int solutionLength, int nbColors, boolean devMod) {
+		setNbTurns(nbTurns);
+		setSolutionLength(solutionLength);
+		setNbColors(nbColors);
 		this.devMod = devMod;
 	}
 	
-	protected void setNbCoups(int nbCoups) {
-		this.nbCoups = nbCoups;
+	protected void setNbTurns(int nbTurns) {
+		this.nbTurns = nbTurns;
 	}
-	protected void setNbCases(int nbCases) {
-		this.nbCases = nbCases;
+	protected void setSolutionLength(int nbCases) {
+		this.solutionLength = nbCases;
 	}
-	protected void setNbCouleurs(int nbCouleurs) {
-		this.nbCouleurs = nbCouleurs;
+	protected void setNbColors(int nbColors) {
+		this.nbColors = nbColors;
 	}
 	
-	public int getNbCoups() {
-		return this.nbCoups;
+	public int getNbTurns() {
+		return this.nbTurns;
 	}
-	public int getNbCases() {
-		return this.nbCases;
+	public int getSolutionLength() {
+		return this.solutionLength;
 	}
-	public int getNbCouleurs() {
-		return this.nbCouleurs;
+	public int getNbColors() {
+		return this.nbColors;
 	}
 }

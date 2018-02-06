@@ -3,17 +3,17 @@ import com.gg.joueurs.*;
 
 public abstract class Game {
 
-	protected int nbCases;
-	protected int nbCoups;
+	protected int solutionLength;
+	protected int nbTurns;
 
 	protected Player attacker;
 	protected Player defensor;
 
 
-	public Game(int nbCoups, int nbCases, Player attacker, Player defensor) {
+	public Game(int nbTurns, int solutionLength, Player attacker, Player defensor) {
 		
-		this.nbCoups = nbCoups;
-		this.nbCases = nbCases;
+		this.nbTurns = nbTurns;
+		this.solutionLength = solutionLength;
 		this.attacker = attacker;
 		this.defensor = defensor;
 	}
@@ -23,7 +23,7 @@ public abstract class Game {
 	public abstract void attackerPlay();
 
 	public abstract void defensorAnswer();
-
+	
 	public abstract EndGameState nextTurn();
 
 }

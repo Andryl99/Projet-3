@@ -78,11 +78,11 @@ public class Menu {
 	private Game createGame(int gameChoice, int modChoice) {
 		if (gameChoice == 1) {
 			Player player1 = new HumanPlayer();
-			Player player2 = new AIPlayer(config.getNbCases());
+			Player player2 = new AIPlayer(config.getSolutionLength());
 			if (modChoice == 1) {
-				return new MoreLessGame(config.getNbCoups(), config.getNbCases(), player1, player2);
+				return new MoreLessGame(config.getNbTurns(), config.getSolutionLength(), player1, player2);
 			} else if (modChoice == 2) {
-				return new MoreLessGame(config.getNbCoups(), config.getNbCases(), player2, player1);
+				return new MoreLessGame(config.getNbTurns(), config.getSolutionLength(), player2, player1);
 			}
 		} else if (gameChoice == 2) {
 			System.out.println("Mastermind est toujours en développement !");
