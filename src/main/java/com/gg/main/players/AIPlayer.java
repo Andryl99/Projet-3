@@ -1,4 +1,4 @@
-package com.gg.joueurs;
+package com.gg.main.players;
 
 import java.util.Random;
 
@@ -15,8 +15,8 @@ public class AIPlayer extends Player {
 		this.memMax = new int[solutionLength];
 
 		for (int i = 0; i < solutionLength; i++) {
-			memMin[i] = 1;
-			memMax[i] = 9;
+			memMin[i] = 0;
+			memMax[i] = 10;
 		}
 	}
 

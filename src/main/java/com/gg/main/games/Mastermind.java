@@ -1,6 +1,7 @@
-package com.gg.main;
+package com.gg.main.games;
 
-import com.gg.joueurs.Player;
+import com.gg.main.EndGameState;
+import com.gg.main.players.Player;
 
 public class Mastermind extends Game {
 
@@ -25,9 +26,15 @@ public class Mastermind extends Game {
 	}
 
 	@Override
-	public EndGameState nextTurn() {
+	public EndGameState stateOfGame() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean nextTurn() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	

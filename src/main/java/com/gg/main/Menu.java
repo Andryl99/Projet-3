@@ -1,9 +1,16 @@
 package com.gg.main;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
-import com.gg.joueurs.*;
+import com.gg.main.games.Game;
+import com.gg.main.games.GameFactory;
+import com.gg.main.games.MoreLessGame;
+import com.gg.main.players.AIPlayer;
+import com.gg.main.players.HumanPlayer;
+import com.gg.main.players.Player;
+import com.gg.main.players.PlayerFactory;
 
 public class Menu {
 
@@ -19,6 +26,7 @@ public class Menu {
 		int modChoice;
 		int endGameChoice;
 		boolean exit = false;
+		boolean isLastTurn = false;
 
 		while (!exit) {
 
@@ -43,35 +51,63 @@ public class Menu {
 
 			// Création du jeu
 			do {
-				Game game = this.createGame(gameChoice, modChoice);
-				game.defensorSelectSolution();
+				PlayerFactory playerFactory = new PlayerFactory();
+				GameFactory gameFactory = new GameFactory();
+				
+				List<Game> gl = gameFactory.getAListOfGames(gameChoice, modChoice) ;
+				
+//				Game game = this.createGame(gameChoice, modChoice);				
+//				game.defensorSelectSolution();
 
+				
+				for (Game game : gl) {
+					game.defensorSelectSolution();
+				}
 				// Boucle du jeu
+//				do {
+//					game.attackerPlay();
+//					game.defensorAnswer();
+//					if (game.stateOfGame().equals(EndGameState.AUCUNGAGNANT)) {
+//						continue;
+//					} else if (game.stateOfGame().equals(EndGameState.ATTAQUANTGAGNE)) {
+//						System.out.println("Attaquant gagne!");
+//						break;
+//					} else if (game.stateOfGame().equals(EndGameState.DEFENSEURGAGNE)) {
+//						System.out.println("Défenseur gagne!");
+//						break;
+//					}
+//				} while (true);
 				do {
-					game.attackerPlay();
-					game.defensorAnswer();
-					if (game.nextTurn().equals(EndGameState.AUCUNGAGNANT)) {
-						continue;
-					} else if (game.nextTurn().equals(EndGameState.ATTAQUANTGAGNE)) {
-						System.out.println("Attaquant gagne!");
-						break;
-					} else if (game.nextTurn().equals(EndGameState.DEFENSEURGAGNE)) {
-						System.out.println("Défenseur gagne!");
-						break;
+					for (Game game : gl) {
+						isLastTurn = game.nextTurn();
+						if( isLastTurn) break;
 					}
-				} while (true);
-
+					
+				} while (!isLastTurn);
+				
+				
+				switch (gl.get(0).stateOfGame()) {
+				case AUCUNGAGNANT : 
+					break;
+				case ATTAQUANTGAGNE :
+					System.out.println("Attaquant gagne!");	
+					break;
+				case DEFENSEURGAGNE :
+					System.out.println("Défenseur gagne!");
+					break;
+				}
+				
+				
 				displayEndGameMenu();
 				endGameChoice = this.intInput();
 
 				if (endGameChoice == 1) {
 					continue;
-				} else if (endGameChoice == 2) {
 				} else if (endGameChoice == 3) {
 					exit = true;
 				}
 
-			} while (endGameChoice != 2 && endGameChoice != 3);
+			} while (endGameChoice == 1 );
 		}
 	}
 
@@ -111,7 +147,7 @@ public class Menu {
 	public void displayGameList() {
 		System.out.println("--------------------");
 		System.out.println("Choisissez un jeu");
-		System.out.println("1 - RecherchePM");
+		System.out.println("1 - Jeu du Plus ou Moins");
 		System.out.println("2 - Mastermind");
 	}
 	public void displayModList() {

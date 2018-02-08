@@ -1,4 +1,4 @@
-package com.gg.joueurs;
+package com.gg.main.players;
 
 import java.util.Scanner;
 
