@@ -5,18 +5,18 @@ import java.util.Random;
 public class AIPlayer extends Player {
 
 	private int[] currentTab;
-	private int[] memMin;
-	private int[] memMax;
+	private int[] lowerBoundTab;
+	private int[] upperBoundTab;
 	Random rand = new Random();
 
 	public AIPlayer(int solutionLength) {
 		this.currentTab = new int[solutionLength];
-		this.memMin = new int[solutionLength];
-		this.memMax = new int[solutionLength];
+		this.lowerBoundTab = new int[solutionLength];
+		this.upperBoundTab = new int[solutionLength];
 
 		for (int i = 0; i < solutionLength; i++) {
-			memMin[i] = 0;
-			memMax[i] = 10;
+			lowerBoundTab[i] = 0;
+			upperBoundTab[i] = 10;
 		}
 	}
 
@@ -38,30 +38,7 @@ public class AIPlayer extends Player {
 
 	@Override
 	public String giveAnswer(String proposition, String solution, int solutionLength) {
-
-		int digitProp;
-		int digitSol;
-
-		String reponse = "";
-
-		// On compare les combinaison et determine le r�sultat
-		// Ici les param�tre de l'application change la borne sup;
-		for (int i = 0; i < solutionLength; i++) {
-
-			digitProp = Integer.parseInt(String.valueOf(proposition.charAt(i)));
-			digitSol = Integer.parseInt(String.valueOf(solution.charAt(i)));
-
-			if (digitProp == digitSol)
-				reponse += "=";
-			else if (digitProp < digitSol)
-				reponse += "+";
-			else if (digitProp > digitSol)
-				reponse += "-";
-		}
-
-		System.out.println("Proposition : " + proposition + "\tSolution : " + solution + "\t\t==> " + reponse);
-
-		return reponse;
+		return null;
 	}
 
 	@Override
@@ -76,30 +53,27 @@ public class AIPlayer extends Player {
 				currentTab[i] = rand.nextInt(max - min + 1) + min;
 				proposition += currentTab[i];
 			}
-
 			return proposition;
 		}
 
 		for (int i = 0; i < solutionLength; i++) {
 
 			if (correction.charAt(i) == '+') {
-				memMin[i] = currentTab[i];
-				// if (((memMax[i] + memLastPlayed[i]) / 2) != memLastPlayed[i])
-				if ((memMax[i] - currentTab[i]) > 1 ) // si l'interval existe
+				lowerBoundTab[i] = currentTab[i];
+				if ((upperBoundTab[i] - lowerBoundTab[i]) > 1) // si l'interval existe
 				{
-					currentTab[i] = (memMax[i] + currentTab[i]) / 2;
+					currentTab[i] = (upperBoundTab[i] + lowerBoundTab[i]) / 2;
 				} else {
-					currentTab[i]++ ;
+					currentTab[i]++;
 				}
 
 			} else if (correction.charAt(i) == '-') {
-				memMax[i] = currentTab[i];
-				currentTab[i] = (memMin[i] + currentTab[i]) / 2;
-				}
+				upperBoundTab[i] = currentTab[i];
+				currentTab[i] = (lowerBoundTab[i] + upperBoundTab[i]) / 2;
+			}
 			proposition += currentTab[i];
-			
+
 		}
 		return proposition;
 	}
 }
-

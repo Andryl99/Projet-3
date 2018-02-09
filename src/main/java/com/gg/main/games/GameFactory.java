@@ -13,14 +13,22 @@ public class GameFactory {
 	private PlayerFactory playerFactory;
 	private APairOfPlayer aPairOfPlayer;
 	
-	public Game getGame(int gameChoice, int modChoice) {
-		return createGame(gameChoice, modChoice);
+	public GameFactory(ConfigurationClass config) {
+		this.config = config;
+	}
+	
+	public Game getGame(int gameChoice, int modChoice, boolean reverserFlag) {
+
+		return createGame(gameChoice, modChoice, reverserFlag);
 	}
 
-	private Game createGame(int gameChoice, int modChoice) {
-		config = new ConfigurationClass();
-		playerFactory = new PlayerFactory();
+	private Game createGame(int gameChoice, int modChoice, boolean reverserFlag) {
+		playerFactory = new PlayerFactory(config);
 		aPairOfPlayer = playerFactory.getAPairOfPlayer(gameChoice, modChoice);
+		
+		if (reverserFlag == true) {
+			aPairOfPlayer.reversePlayers();
+		}
 		
 		switch (gameChoice) {
 		case 1 :
@@ -36,11 +44,12 @@ public class GameFactory {
 		return createAListOfGames(gameChoice, modChoice);
 	}
 	
+	// Je me sert d'un booleen pour 
 	private List<Game> createAListOfGames(int gameChoice, int modChoice){
 		List<Game> listOfGames = new ArrayList<Game>();
-		listOfGames.add(createGame(gameChoice, modChoice));
+		listOfGames.add(getGame(gameChoice, modChoice, false));
 		if (modChoice == 3) 
-			listOfGames.add(createGame(gameChoice, modChoice));
+			listOfGames.add(getGame(gameChoice, modChoice, true));
 		return listOfGames;
 	}
 }

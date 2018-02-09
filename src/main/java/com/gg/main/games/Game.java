@@ -46,4 +46,6 @@ public abstract class Game {
 	
 	public abstract EndGameState stateOfGame();
 
+	public abstract void initialize();
+
 }

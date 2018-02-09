@@ -34,7 +34,8 @@ public class Menu {
 			modChoice = -1;
 			endGameChoice = -1;
 			displayMenuHeader();
-
+			
+			GameFactory gameFactory = new GameFactory(config);
 			// Choix du jeu
 			do {
 				displayGameList();
@@ -42,7 +43,7 @@ public class Menu {
 
 			} while (gameChoice < 1 || gameChoice > 2);
 
-			// Choix du mode
+			// Choix du mode de jeu
 			do {
 				displayModList();
 				modChoice = this.intInput();
@@ -50,43 +51,26 @@ public class Menu {
 			} while (modChoice != 1 && modChoice != 2 && modChoice != 3);
 
 			// Création du jeu
-			do {
-				PlayerFactory playerFactory = new PlayerFactory();
-				GameFactory gameFactory = new GameFactory();
-				
-				List<Game> gl = gameFactory.getAListOfGames(gameChoice, modChoice) ;
-				
-//				Game game = this.createGame(gameChoice, modChoice);				
-//				game.defensorSelectSolution();
+			List<Game> gameList = gameFactory.getAListOfGames(gameChoice, modChoice) ;
 
-				
-				for (Game game : gl) {
+			// Boucle du jeu
+			do {
+				for (Game game : gameList) {
+					game.initialize();
 					game.defensorSelectSolution();
 				}
-				// Boucle du jeu
-//				do {
-//					game.attackerPlay();
-//					game.defensorAnswer();
-//					if (game.stateOfGame().equals(EndGameState.AUCUNGAGNANT)) {
-//						continue;
-//					} else if (game.stateOfGame().equals(EndGameState.ATTAQUANTGAGNE)) {
-//						System.out.println("Attaquant gagne!");
-//						break;
-//					} else if (game.stateOfGame().equals(EndGameState.DEFENSEURGAGNE)) {
-//						System.out.println("Défenseur gagne!");
-//						break;
-//					}
-//				} while (true);
+				
+				// On enchaine les tours ...
+				// TODO ... buggé en duel
 				do {
-					for (Game game : gl) {
+					for (Game game : gameList) {
 						isLastTurn = game.nextTurn();
 						if( isLastTurn) break;
 					}
-					
 				} while (!isLastTurn);
 				
-				
-				switch (gl.get(0).stateOfGame()) {
+				// TODO ... est buggé en duel
+				switch (gameList.get(0).stateOfGame()) {
 				case AUCUNGAGNANT : 
 					break;
 				case ATTAQUANTGAGNE :
@@ -95,22 +79,21 @@ public class Menu {
 				case DEFENSEURGAGNE :
 					System.out.println("Défenseur gagne!");
 					break;
-				}
-				
+				}			
 				
 				displayEndGameMenu();
 				endGameChoice = this.intInput();
-
+				// Gestion fin de partie
 				if (endGameChoice == 1) {
 					continue;
 				} else if (endGameChoice == 3) {
 					exit = true;
 				}
-
 			} while (endGameChoice == 1 );
 		}
 	}
 
+	// Oboslete
 	private Game createGame(int gameChoice, int modChoice) {
 		if (gameChoice == 1) {
 			Player player1 = new HumanPlayer();
@@ -126,7 +109,8 @@ public class Menu {
 		}
 		return null;
 	}
-
+	
+	// TODO scanner n'est jamais fermé
 	public int intInput() {
 		int choix = -1;
 		System.out.print("Choix : ");
@@ -140,6 +124,7 @@ public class Menu {
 		return choix;
 	}
 	
+	// Des méthodes simple pour
 	public void displayMenuHeader() {
 		System.out.println("multi-jeux");
 	}

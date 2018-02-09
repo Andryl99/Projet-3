@@ -24,4 +24,10 @@ public class APairOfPlayer {
 	public void setPlayer2(Player player2) {
 		this.player2 = player2;
 	}
+
+	public void reversePlayers() {
+		Player tmp = player1;
+		player1 = player2;
+		player2 = tmp;		
+	}
 }

@@ -37,5 +37,10 @@ public class Mastermind extends Game {
 		return false;
 	}
 
+	@Override
+	public void initialize() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
