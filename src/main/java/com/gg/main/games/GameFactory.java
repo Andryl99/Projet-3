@@ -15,6 +15,7 @@ public class GameFactory {
 	
 	public GameFactory(ConfigurationClass config) {
 		this.config = config;
+		playerFactory = new PlayerFactory(config);
 	}
 	
 	public Game getGame(int gameChoice, int modChoice, boolean reverserFlag) {
@@ -23,7 +24,6 @@ public class GameFactory {
 	}
 
 	private Game createGame(int gameChoice, int modChoice, boolean reverserFlag) {
-		playerFactory = new PlayerFactory(config);
 		aPairOfPlayer = playerFactory.getAPairOfPlayer(gameChoice, modChoice);
 		
 		if (reverserFlag == true) {

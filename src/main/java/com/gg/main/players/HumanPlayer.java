@@ -14,6 +14,7 @@ public class HumanPlayer extends Player {
 
 	@Override
 	public String giveAnswer(String proposition, String solution, int solutionLength) {
+		System.out.println("Corrigez la combinaison suivante : " + proposition + "\tSolution : " + solution);
 		return this.inputErrorCheck(solutionLength, SequenceType.ISCORRECTION); 
 	}
 
