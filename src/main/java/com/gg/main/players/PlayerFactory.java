@@ -2,7 +2,7 @@ package com.gg.main.players;
 
 import com.gg.main.ConfigurationClass;
 
-public class PlayerFactory {
+public class PlayerFactory extends Exception {
 
 	private ConfigurationClass config;
 		

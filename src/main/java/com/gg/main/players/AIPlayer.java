@@ -65,6 +65,7 @@ public class AIPlayer extends Player {
 					currentTab[i] = (upperBoundTab[i] + lowerBoundTab[i]) / 2;
 				} else {
 					currentTab[i]++;
+					//remplacer par une exeption
 				}
 
 			} else if (correction.charAt(i) == '-') {

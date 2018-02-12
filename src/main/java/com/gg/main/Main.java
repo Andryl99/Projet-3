@@ -5,7 +5,13 @@ public class Main {
 	public static void main(String[] args) {
 		boolean devMod = false;
 		String firstArg;
-
+/*
+ * 
+ * int gameChoice = -1;
+ * int modChoice = -1;
+ * int endGameChoice = -1;
+ * 
+ */
 		
 		if (args.length > 0)
 		try {
@@ -23,7 +29,18 @@ public class Main {
 		// TODO pour l'instant le devmod n'est pas implement�
 		Menu menu = new Menu();
 		menu.runMenu();
+		/*
+		 * 
+		 * 	Launcher launcher = new Launcher();
+		 * do{
+		 * gameChoice = menu.runGameMenu();
+		 * modChoice  = menu.runModMenu();
+		 * do{
+		 * launcher.runGame(gameChoice, modChoice);
+		 * endGameChoice = menu.runEndGameMenu();
+		 * }while(endGameChoice == 1)
+		 * }while(endGameChoice != 3)
+		 * 
+		 *********/
 	}
 }
-
-// TODO factorisation des scanner dans une classe, le scanner sera une m�thode statique

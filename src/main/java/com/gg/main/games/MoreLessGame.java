@@ -73,7 +73,7 @@ public class MoreLessGame extends Game {
 	}
 
 	@Override
-	public void initialize() {
+	public void reset() {
 		this.turnCounter = 0;
 		this.solution = "";
 		this.answer = "";

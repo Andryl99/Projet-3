@@ -8,18 +8,20 @@ public class HumanPlayer extends Player {
 
 	@Override
 	public String selectSolution(int solutionLength) {
-		System.out.println("Entrez une combinaison de " + solutionLength + " chiffres à trouver.");
+		System.out.print("Entrez une combinaison de " + solutionLength + " chiffres à trouver : ");
 		return this.inputErrorCheck(solutionLength, SequenceType.ISCOMBINATION);
 	}
 
 	@Override
 	public String giveAnswer(String proposition, String solution, int solutionLength) {
-		System.out.println("Corrigez la combinaison suivante : " + proposition + "\tSolution : " + solution);
+		System.out.println("Corrigez la combinaison suivante : " + proposition + "\t\tSolution : " + solution);
+		System.out.print("Correction : ");
 		return this.inputErrorCheck(solutionLength, SequenceType.ISCORRECTION); 
 	}
 
 	@Override
 	public String play(String reponse, int solutionLength) {
+		System.out.print("Proposition : ");
 		return this.inputErrorCheck(solutionLength, SequenceType.ISCOMBINATION);
 	}
 

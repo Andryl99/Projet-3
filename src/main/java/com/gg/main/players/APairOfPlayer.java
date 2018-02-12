@@ -30,4 +30,8 @@ public class APairOfPlayer {
 		player1 = player2;
 		player2 = tmp;		
 	}
+	
+	public APairOfPlayer getReversedPlayers() {
+		return new APairOfPlayer(player2 , player1);
+	}
 }

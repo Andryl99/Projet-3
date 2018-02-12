@@ -26,8 +26,9 @@ public class GameFactory {
 	private Game createGame(int gameChoice, int modChoice, boolean reverserFlag) {
 		aPairOfPlayer = playerFactory.getAPairOfPlayer(gameChoice, modChoice);
 		
+		// Desormais j'utlise getReversedPlayers qui ne détériore pas l'objet original
 		if (reverserFlag == true) {
-			aPairOfPlayer.reversePlayers();
+			aPairOfPlayer = aPairOfPlayer.getReversedPlayers();
 		}
 		
 		switch (gameChoice) {

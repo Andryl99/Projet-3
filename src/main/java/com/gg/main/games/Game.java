@@ -1,6 +1,4 @@
 package com.gg.main.games;
-import java.util.List;
-
 import com.gg.main.EndGameState;
 import com.gg.main.players.Player;
 
@@ -13,7 +11,6 @@ public abstract class Game {
 	protected Player attacker;
 	protected Player defensor;
 
-
 	public Game(int nbTurns, int solutionLength, Player attacker, Player defensor) {
 		
 		this.nbTurns = nbTurns;
@@ -21,19 +18,6 @@ public abstract class Game {
 		this.attacker = attacker;
 		this.defensor = defensor;
 		this.turnCounter = 0;
-	}
-
-	public int getTurnCounter() {
-		return turnCounter;
-	}
-
-	public void setTurnCounter(int turnCounter) {
-		this.turnCounter = turnCounter;
-	}
-
-	public void addPlayers(List<Player> players) {
-		this.attacker = players.get(0);
-		this.defensor = players.get(1);
 	}
 	
 	public abstract void defensorSelectSolution();
@@ -46,6 +30,6 @@ public abstract class Game {
 	
 	public abstract EndGameState stateOfGame();
 
-	public abstract void initialize();
+	public abstract void reset();
 
 }

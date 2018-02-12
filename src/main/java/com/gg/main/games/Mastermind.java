@@ -38,7 +38,7 @@ public class Mastermind extends Game {
 	}
 
 	@Override
-	public void initialize() {
+	public void reset() {
 		// TODO Auto-generated method stub
 		
 	}
