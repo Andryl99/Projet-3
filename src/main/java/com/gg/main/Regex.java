@@ -9,7 +9,7 @@ public class Regex {
 		String regExp;
 		switch (sequence) {
 		case ISCOMBINATION :
-			 regExp = "^[1-9]{" + solutionLength + "}$";
+			 regExp = "^[0-9]{" + solutionLength + "}$";
 			return combination.matches(regExp);
 		case ISCORRECTION :
 			 regExp = "^[-=+]{" + solutionLength + "}$";

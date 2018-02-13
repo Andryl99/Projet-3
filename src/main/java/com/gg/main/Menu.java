@@ -10,86 +10,96 @@ import com.gg.main.games.GameFactory;
 public class Menu {
 
 	// Consultation du fichier config, PEUT ETRE mieux dans main
-	private ConfigurationClass config;
 
-	public Menu() {
-		this.config = new ConfigurationClass(6, 4, 5, false);
-	}
+	public Menu() {	}
 
-	public void runMenu() {
-		int gameChoice;
-		int modChoice;
-		int endGameChoice;
-		boolean exit = false;
-		boolean isLastTurn = false;
-
-		while (!exit) {
-
-			gameChoice = -1;
-			modChoice = -1;
-			endGameChoice = -1;
-			displayMenuHeader();
-
-			GameFactory gameFactory = new GameFactory(config);
-			Game lastGame;
-			// Choix du jeu
-			do {
-				displayGameList();
-				gameChoice = this.intInput();
-			} while (gameChoice < 1 || gameChoice > 2);
-
-			// Choix du mode de jeu
-			do {
-				displayModList();
-				modChoice = this.intInput();
-			} while (modChoice != 1 && modChoice != 2 && modChoice != 3);
-
-			// Création du jeu
-			List<Game> gameList = gameFactory.getAListOfGames(gameChoice, modChoice);
-			
-			lastGame = gameList.get(0);
-			// Boucle du jeu
-			do {
-				for (Game game : gameList) {
-					game.reset();
-					game.defensorSelectSolution();
-				}
-
-				// On enchaine les tours ...
-				do {
-					for (Game game : gameList) {
-						lastGame = game;
-						isLastTurn = game.nextTurn();
-						if (isLastTurn)
-							break;
-					}
-				} while (!isLastTurn);
-
-				// TODO ... est buggé en duel
-				switch (lastGame.stateOfGame()) {
-				case AUCUNGAGNANT:
-					break;
-				case ATTAQUANTGAGNE:
-					System.out.println("Attaquant gagne!");
-					break;
-				case DEFENSEURGAGNE:
-					System.out.println("Défenseur gagne!");
-					break;
-				default :
-					break; 
-				}
-
-				displayEndGameMenu();
-				endGameChoice = this.intInput();
-				// Gestion fin de partie
-				if (endGameChoice == 1) {
-					continue;
-				} else if (endGameChoice == 3) {
-					exit = true;
-				}
-			} while (endGameChoice == 1);
-		}
-	}
+//	public void runMenu() {
+//		/*
+//		 * 
+//		 *  O
+//		 *  B
+//		 *  S
+//		 *  O
+//		 *  L
+//		 *  E
+//		 *  T
+//		 *  E 
+//		 * 
+//		 * 
+//		 */
+//		int gameChoice;
+//		int modChoice;
+//		int endGameChoice;
+//		boolean exit = false;
+//		boolean isLastTurn = false;
+//
+//		while (!exit) {
+//
+//			gameChoice = -1;
+//			modChoice = -1;
+//			endGameChoice = -1;
+//			displayMenuHeader();
+//
+//			GameFactory gameFactory = new GameFactory(config);
+//			Game lastGame;
+//			// Choix du jeu
+//			do {
+//				displayGameList();
+//				gameChoice = this.intInput();
+//			} while (gameChoice < 1 || gameChoice > 2);
+//
+//			// Choix du mode de jeu
+//			do {
+//				displayModList();
+//				modChoice = this.intInput();
+//			} while (modChoice != 1 && modChoice != 2 && modChoice != 3);
+//
+//			// Création du jeu
+//			List<Game> gameList = gameFactory.getAListOfGames(gameChoice, modChoice);
+//			
+//			lastGame = gameList.get(0);
+//			// Boucle du jeu
+//			do {
+//				for (Game game : gameList) {
+//					game.reset();
+//					game.defensorSelectSolution();
+//				}
+//
+//				// On enchaine les tours ...
+//				do {
+//					for (Game game : gameList) {
+//						lastGame = game;
+//						isLastTurn = game.nextTurn();
+//						if (isLastTurn)
+//							break;
+//					}
+//				} while (!isLastTurn);
+//
+//				// TODO ... est buggé en duel
+//				switch (lastGame.stateOfGame()) {
+//				case AUCUNGAGNANT:
+//					break;
+//				case ATTAQUANTGAGNE:
+//					System.out.println("Attaquant gagne!");
+//					break;
+//				case DEFENSEURGAGNE:
+//					System.out.println("Défenseur gagne!");
+//					break;
+//				default :
+//					break; 
+//				}
+//
+//				displayEndGameMenu();
+//				endGameChoice = this.intInput();
+//				// Gestion fin de partie
+//				if (endGameChoice == 1) {
+//					continue;
+//				} else if (endGameChoice == 3) {
+//					exit = true;
+//				}
+//			} while (endGameChoice == 1);
+//		}
+//	}
 
 	public int runGameMenu() {
 		int gameChoice;
@@ -107,7 +117,7 @@ public class Menu {
 		do {
 			displayModList();
 			modChoice = this.intInput();
-		} while (modChoice != 1 && modChoice != 2 && modChoice != 3);
+		} while (modChoice < 1 || modChoice > 3);
 		return modChoice;
 	}
 	
@@ -116,7 +126,7 @@ public class Menu {
 		do {
 			displayEndGameMenu();
 			endGameChoice = this.intInput();
-		} while (endGameChoice != 1 && endGameChoice != 2 && endGameChoice != 3);
+		} while (endGameChoice < 1 || endGameChoice > 3);
 		return endGameChoice;
 	}
 	

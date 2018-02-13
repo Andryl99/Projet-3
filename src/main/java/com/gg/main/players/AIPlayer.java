@@ -15,7 +15,7 @@ public class AIPlayer extends Player {
 		this.upperBoundTab = new int[solutionLength];
 
 		for (int i = 0; i < solutionLength; i++) {
-			lowerBoundTab[i] = 0;
+			lowerBoundTab[i] = -1;
 			upperBoundTab[i] = 10;
 		}
 	}
@@ -23,7 +23,7 @@ public class AIPlayer extends Player {
 	@Override
 	public String selectSolution(int solutionLength) {
 
-		int min = 1;
+		int min = 0;
 		int max = 9;
 		int nbRandom;
 		String solution = "";
@@ -46,7 +46,7 @@ public class AIPlayer extends Player {
 
 		String proposition = "";
 		if (correction.equals("")) {
-			int min = 1;
+			int min = 0;
 			int max = 9;
 
 			for (int i = 0; i < solutionLength; i++) {

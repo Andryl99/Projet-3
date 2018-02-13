@@ -12,16 +12,18 @@ public class Launcher {
 	private Game lastGame;
 	
 	public Launcher() {
-		GameFactory gameFactory = new GameFactory(config);
+		this.config = new ConfigurationClass(6, 4, 5, false);
+		this.gameFactory = new GameFactory(config);
 	}
 	
-	public void launchGame(int gameChoice, int modChoice) {
+	public void runGame(int gameChoice, int modChoice) {
 		
 		boolean isLastTurn = false;
 		// Création du jeu
 		List<Game> gameList = gameFactory.getAListOfGames(gameChoice, modChoice);
 		lastGame = gameList.get(0);
 		// Boucle du jeu
+		
 			for (Game game : gameList) {
 				game.reset();
 				game.defensorSelectSolution();
