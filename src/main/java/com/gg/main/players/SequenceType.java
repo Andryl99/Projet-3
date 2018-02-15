@@ -2,5 +2,6 @@ package com.gg.main.players;
 
 public enum SequenceType {
 	ISCOMBINATION,
-	ISCORRECTION;
+	ISCORRECTION,
+	ISMASTERMINDCORRECTION;
 }

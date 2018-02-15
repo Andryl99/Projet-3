@@ -25,6 +25,7 @@ public class APairOfPlayer {
 		this.player2 = player2;
 	}
 
+	// Non utilisé (détruit d'objet)
 	public void reversePlayers() {
 		Player tmp = player1;
 		player1 = player2;

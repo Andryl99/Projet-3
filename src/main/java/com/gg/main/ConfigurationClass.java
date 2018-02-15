@@ -22,13 +22,13 @@ public class ConfigurationClass {
 		this.devMod = devMod;
 	}
 	
-	protected void setNbTurns(int nbTurns) {
+	private void setNbTurns(int nbTurns) {
 		this.nbTurns = nbTurns;
 	}
-	protected void setSolutionLength(int nbCases) {
+	private void setSolutionLength(int nbCases) {
 		this.solutionLength = nbCases;
 	}
-	protected void setNbColors(int nbColors) {
+	private void setNbColors(int nbColors) {
 		this.nbColors = nbColors;
 	}
 	

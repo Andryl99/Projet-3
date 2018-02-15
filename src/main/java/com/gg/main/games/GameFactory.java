@@ -23,7 +23,7 @@ public class GameFactory {
 		return createGame(gameChoice, modChoice, reverserFlag);
 	}
 
-	private Game createGame(int gameChoice, int modChoice, boolean reverserFlag) {
+	private Game createGame(int gameChoice, int modChoice, boolean reverserFlag) throws NullPointerException {
 		// On leve une possible exception a la creation des joueurs
 		try {
 		aPairOfPlayer = playerFactory.getAPairOfPlayer(gameChoice, modChoice);
@@ -62,7 +62,9 @@ public class GameFactory {
 		listOfGames.add(getGame(gameChoice, modChoice, false));
 		if (modChoice == 3)
 			listOfGames.add(getGame(gameChoice, modChoice, true));
-		} catch (NullPointerException e) { e.printStackTrace();}
+		} catch (NullPointerException e) { 
+			e.printStackTrace();
+		}
 		return listOfGames;
 	}
 }

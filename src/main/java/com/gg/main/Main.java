@@ -28,7 +28,7 @@ public class Main {
 		Menu menu = new Menu();
 		// menu.runMenu();
 
-		Launcher launcher = new Launcher();
+		Launcher launcher = new Launcher(devMod);
 		do {
 			gameChoice = menu.runGameMenu();
 			modChoice = menu.runModMenu();

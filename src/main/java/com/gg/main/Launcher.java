@@ -11,8 +11,9 @@ public class Launcher {
 	private GameFactory gameFactory;
 	private Game lastGame;
 	
-	public Launcher() {
-		this.config = new ConfigurationClass(6, 4, 5, false);
+	public Launcher(boolean devMod) {
+		// constructeur (Nb de tours, Nb de chiffre dans la solution, nombre de couleurs dans le mastermind)
+		this.config = new ConfigurationClass(8, 4, 7, devMod);
 		this.gameFactory = new GameFactory(config);
 	}
 	
@@ -21,6 +22,7 @@ public class Launcher {
 		boolean isLastTurn = false;
 		// Création du jeu
 		List<Game> gameList = gameFactory.getAListOfGames(gameChoice, modChoice);
+		// initialisation
 		lastGame = gameList.get(0);
 		// Boucle du jeu
 		
@@ -39,7 +41,7 @@ public class Launcher {
 				}
 			} while (!isLastTurn);
 
-			// TODO ... est buggé en duel
+			// TODO ... est buggé en duel, récupérer des données sur le derniers jeu, pour determiné le nom du vainqueur
 			switch (lastGame.stateOfGame()) {
 			case AUCUNGAGNANT:
 				break;
