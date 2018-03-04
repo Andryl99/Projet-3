@@ -4,6 +4,15 @@ import com.gg.main.players.Player;
 
 public abstract class Game {
 
+	/*
+	 * 
+	 *  SolutionLength ne sert pas ici
+	 *  
+	 *  Le devMod pourrai etre utilisé dans cette classe
+	 * 
+	 * 
+	 * 
+	 */
 	protected int solutionLength;
 	protected int nbTurns;
 	protected int turnCounter;

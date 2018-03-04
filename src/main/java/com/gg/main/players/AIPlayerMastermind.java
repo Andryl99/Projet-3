@@ -35,8 +35,8 @@ public class AIPlayerMastermind extends Player {
 	public String giveAnswer(String proposition, String solution) {
 		
 		String str = "";
+		int areRightPosition = 0;
 		int arePresent = 0;
-		int areInRightPosition = 0;
 		
 
 		Map<Character,Integer> propositionMap;
@@ -47,7 +47,7 @@ public class AIPlayerMastermind extends Player {
 				
 				if (proposition.charAt(i) == solution.charAt(j)) {
 					if (i == j) {
-						arePresent++;
+						areRightPosition++;
 					}
 				}
 			}
@@ -70,18 +70,23 @@ public class AIPlayerMastermind extends Player {
 		 */
 		for (Map.Entry<Character, Integer> entry : solutionMap.entrySet()) {
 			if(propositionMap.containsKey(entry.getKey())) {
-				areInRightPosition += getTheLesser(propositionMap.get(entry.getKey()), entry.getValue());
+				arePresent += getTheLesser(propositionMap.get(entry.getKey()), entry.getValue());
 			}
 		}
 		
 		/*
 		 * La boucle si dessus nous a renvoyé tout le nombre de chiffre present dans les deux solutions,
 		 * 		il faut les distingué des valeurs bien placé, déterminée plus haut
+		 * 	[0,0,0,2] [4,4,0,0]
+		 * (0,3)		(0,2)
+		 *  
+		 *  nombre presents...
+		 *  ... le plus petit des deux valeur 2
 		 *  
 		 */
-		areInRightPosition -= arePresent;
+		arePresent -= areRightPosition;
 		
-		str = "Nombre bien placé : " + arePresent + "\tNombre present : " + areInRightPosition;
+		str = "Nombre bien placé : " + areRightPosition + "\tNombre present : " + arePresent;
 		System.out.println(str);
 		return str;
 	}

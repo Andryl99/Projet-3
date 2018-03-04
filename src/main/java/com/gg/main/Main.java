@@ -1,9 +1,12 @@
 package com.gg.main;
+import org.apache.logging.log4j.*;
 
 public class Main {
 
+	static final Logger logger = LogManager.getLogger();
+	
 	public static void main(String[] args) {
-		boolean devMod = false;
+		boolean devMod = true;
 		String firstArg;
 		
 		int gameChoice = -1;
@@ -30,6 +33,8 @@ public class Main {
 
 		Launcher launcher = new Launcher(devMod);
 		do {
+			// try catch illegal argument exception
+			// utiliser e.getMessage();
 			gameChoice = menu.runGameMenu();
 			modChoice = menu.runModMenu();
 			do {

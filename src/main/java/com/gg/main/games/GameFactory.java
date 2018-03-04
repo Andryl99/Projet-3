@@ -23,13 +23,11 @@ public class GameFactory {
 		return createGame(gameChoice, modChoice, reverserFlag);
 	}
 
-	private Game createGame(int gameChoice, int modChoice, boolean reverserFlag) throws NullPointerException {
+	private Game createGame(int gameChoice, int modChoice, boolean reverserFlag) throws IllegalArgumentException {
 		// On leve une possible exception a la creation des joueurs
-		try {
+		
 		aPairOfPlayer = playerFactory.getAPairOfPlayer(gameChoice, modChoice);
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-		}
+
 		
 		// Desormais j'utlise getReversedPlayers qui ne détériore pas l'objet original
 		if (reverserFlag == true) {
@@ -47,7 +45,7 @@ public class GameFactory {
 					aPairOfPlayer.getPlayer1(), aPairOfPlayer.getPlayer2());
 		default:
 			// Utilisation d'une exception qui est levé dans createAListOfGames, on evite le null pointer
-			throw new NullPointerException("Programming error, gameChoice is "+ gameChoice + " and should be 1 or 2. Game received a null pointer");
+			throw new IllegalArgumentException("Programming error, gameChoice is "+ gameChoice + " and should be 1 or 2. Game received a null pointer");
 		}
 	}
 
@@ -62,7 +60,7 @@ public class GameFactory {
 		listOfGames.add(getGame(gameChoice, modChoice, false));
 		if (modChoice == 3)
 			listOfGames.add(getGame(gameChoice, modChoice, true));
-		} catch (NullPointerException e) { 
+		} catch (IllegalArgumentException e) { 
 			e.printStackTrace();
 		}
 		return listOfGames;

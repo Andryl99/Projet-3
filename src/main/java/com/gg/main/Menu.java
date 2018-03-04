@@ -131,6 +131,7 @@ public class Menu {
 	}
 	
 	public int intInput() {
+		// ne pas quiiter la  méthode tant que le choix est -1
 		int choix = -1;
 		System.out.print("Choix : ");
 		Scanner scanner = new Scanner(System.in);

@@ -33,7 +33,7 @@ public class PlayerFactory {
 			case 3:
 				return new APairOfPlayer(new HumanPlayerMoreLess(config), new AIPlayerMoreLess(config));
 			default:
-				throw new NullPointerException();
+				throw new IllegalArgumentException();
 			}
 		}
 		else {
@@ -45,7 +45,7 @@ public class PlayerFactory {
 			case 3 :
 				return new APairOfPlayer(new HumanPlayerMastermind(config), new AIPlayerMastermind(config));
 			default :
-				throw new NullPointerException();
+				throw new IllegalArgumentException();
 			}
 		}
 	}
