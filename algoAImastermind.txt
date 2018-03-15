@@ -1,0 +1,69 @@
+		/*
+		 * 
+		 * 
+		 * Proposition : 0123
+		Nombre bien placé : 1	Nombre present : 1
+		
+		info : on peut jouer sur ces chiffre
+		on part d'un ensemble de X-1 chiffre
+		on en change un au hazard et on regarde la réponse
+		
+		Proposition : 0124
+		Nombre bien placé : 2	Nombre present : 0
+
+
+		3 possibiliité :
+		Si BP et NP  = 0, on vire les 4 chiffres
+		
+			Si BP augmente le nouveau chiffre est dans la combinaison a la BP
+				et 
+					Si NP change pas :  l'ancien pas dans la combi
+					Si NP diminu : l'ancien etait présent a la mauvaise place
+			Si BP diminue la nouveau chiffre n'est pas dans dans la combi
+				et l'ancien était dans la combi a la BP
+			
+			Si BP ne change pas et
+				Si NP augmente le nouverau chiffre est dans la combinaison a la mauvaise place
+				et l'ancien chiffre n'était pas dans la combi
+				Si NP diminu, le nouveau chiffre n'est pas dans la combi
+				et l'ancien y était.
+				Si Np egale on entre dans un fonction qui test l'ancien et le nouveau
+											
+											A = ancien
+											N = nouveau
+											X = quelconque
+											
+											On joue XXAN
+											
+											Si NP diminu : les deux n'tait pas dans la combi et --X- y était
+											Si NP augmente : les deux sont dedans
+											Si Np ne change pas : les deux y était pas
+											
+			++++ Une mémoire qui élimine les nombres au fur et a mesure
+					elimination de nombre si NP + BP = 0
+					elimination eventuelle des nombre ancien et nouveau
+					.
+			++++ Une mémoire BP
+				les chiffre a ne plus jouer sauf pour donné la solution
+			++++ Une mémoire précdent
+				contient la derniere combi avec sa correction
+			++++ Une mémoire a supprimé
+				vide la mémoire a chaque appel
+			
+		
+		Proposition : 3124
+		Nombre bien placé : 1	Nombre present : 1
+
+		Proposition : 0324
+		Nombre bien placé : 3	Nombre present : 0
+
+		Proposition : 0334
+		Nombre bien placé : 3	Nombre present : 0
+
+		Proposition : 0344
+		Nombre bien placé : 4	Nombre present : 0
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
