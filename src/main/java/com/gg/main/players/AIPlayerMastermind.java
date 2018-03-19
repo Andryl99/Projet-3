@@ -11,20 +11,34 @@ public class AIPlayerMastermind extends Player {
 
 	private Random rand = new Random();
 	private Map<Character, Integer> solutionMap;
-	
-	
+
 	private String lastPlayedPropostion;
 	private boolean initStep;
 	private ArrayList<Integer> memPlayedFigures;
 	private ArrayList<Integer> memPlayableFigures;
-	
+	private Map<Integer, Integer> memSolutionFigures;
+	private int[] memSolutionTab;
+
 	private int previousPresent;
 	private int previousRightPosition;
+
+	private int newSwappedFigure;
+	private int previousSwappedFigure;
+	private int swappedPosition;
+
+	private int present = 0;
+	private int rightPosition = 0;
+
+	private NextPlayEnum nextPlayEnum;
+	private boolean hold;
 
 	public AIPlayerMastermind(ConfigurationClass config) {
 		super(config);
 		this.lastPlayedPropostion = "";
 		this.initStep = true;
+		this.hold = false;
+		this.nextPlayEnum = NextPlayEnum.UNDEFINED;
+		this.memSolutionTab = new int[config.getSolutionLength()];
 	}
 
 	@Override
@@ -101,112 +115,26 @@ public class AIPlayerMastermind extends Player {
 
 	@Override
 	public String play(String correction) {
-		int present = 0;
-		int rightPosition = 0;
 		String proposition = "";
 
-		if (initStep) {
-			if (memPlayableFigures.isEmpty()) {
-				for (int i = 0; i <= config.getNbColors(); i++) {
-					memPlayableFigures.add(i);
-				}
-			}
-
-			for (int i = 0; i < config.getSolutionLength(); i++) {
-				if (i < config.getNbColors()) {
-					proposition += i;
-					memPlayedFigures.add(i);
-				}
-				else {
-					proposition += i - config.getNbColors();
-				}
-			}
-			initStep = false;
-			return proposition;
-		}
 
 		if (correction != "") {
-			present = correction.charAt(2);
-			rightPosition = correction.charAt(4);
+			present = correction.charAt(1) - 48;
+			rightPosition = correction.charAt(3) - 48;
 		}
 
-		if ((present + rightPosition) == 0) {
-			for (int i = 0; i < lastPlayedPropostion.length(); i++) {
-				// on retire les chiffres joués au dernier coup de la liste memPlayableFigures
-				memPlayableFigures.remove(lastPlayedPropostion.charAt(i));
-			}
-			
-			/*
-			 * 
-			 * Puis on joue un nouveau coup
-			 * return proposition
-			 */
-		}
+		memPlayableFigures = cleanMemory();
+		memPlayableFigures = memoryOptimizer();
+		this.memoryChecker();
 
-		
-		if (rightPosition > previousRightPosition) {
-			// le nouveau chiffre est dans la combi a la bonne place
-		}
-		
-			
+		proposition = this.playMethod();
+
 		// sauvegarde de la correction
 		present = previousPresent;
 		rightPosition = previousRightPosition;
 		// rentre la proposition en mémoire
 		this.lastPlayedPropostion = proposition;
 		return proposition;
-
-		/*
-		 * ALGO
-		 *
-		 * 
-		 * 
-		 * Proposition : 0123 Nombre bien placé : 1 Nombre present : 1
-		 * 
-		 * info : on peut jouer sur ces chiffre on part d'un ensemble de X-1 chiffre on
-		 * en change un au hazard et on regarde la réponse
-		 * 
-		 * Proposition : 0124 Nombre bien placé : 2 Nombre present : 0
-		 * 
-		 * 
-		 * 3 possibiliité : Si BP et NP = 0, on vire les 4 chiffres
-		 * 
-		 * Si BP augmente le nouveau chiffre est dans la combinaison a la BP et Si NP
-		 * change pas : l'ancien pas dans la combi Si NP diminu : l'ancien etait présent
-		 * a la mauvaise place Si BP diminue la nouveau chiffre n'est pas dans dans la
-		 * combi et l'ancien était dans la combi a la BP
-		 * 
-		 * Si BP ne change pas et Si NP augmente le nouverau chiffre est dans la
-		 * combinaison a la mauvaise place et l'ancien chiffre n'était pas dans la combi
-		 * Si NP diminu, le nouveau chiffre n'est pas dans la combi et l'ancien y était.
-		 * Si Np egale on entre dans un fonction qui test l'ancien et le nouveau
-		 * 
-		 * A = ancien N = nouveau X = quelconque
-		 * 
-		 * On joue XXAN
-		 * 
-		 * Si NP diminu : les deux n'tait pas dans la combi et --X- y était Si NP
-		 * augmente : les deux sont dedans Si Np ne change pas : les deux y était pas
-		 * 
-		 * ++++ Une mémoire qui élimine les nombres au fur et a mesure elimination de
-		 * nombre si NP + BP = 0 elimination eventuelle des nombre ancien et nouveau .
-		 * ++++ Une mémoire BP les chiffre a ne plus jouer sauf pour donné la solution
-		 * ++++ Une mémoire précdent contient la derniere combi avec sa correction ++++
-		 * Une mémoire a supprimé vide la mémoire a chaque appel
-		 * 
-		 * 
-		 * Proposition : 3124 Nombre bien placé : 1 Nombre present : 1
-		 * 
-		 * Proposition : 0324 Nombre bien placé : 3 Nombre present : 0
-		 * 
-		 * Proposition : 0334 Nombre bien placé : 3 Nombre present : 0
-		 * 
-		 * Proposition : 0344 Nombre bien placé : 4 Nombre present : 0
-		 * 
-		 * 
-		 * 
-		 * 
-		 */
 	}
 
 	// methode de giveAnswer
@@ -227,9 +155,126 @@ public class AIPlayerMastermind extends Player {
 		return (a > b) ? b : a;
 	}
 
-	/*
-	 * private String startTheMatch(String answer) { String proposition = ""; for
-	 * (int i = 0 ; i < config.getSolutionLength() ; i++) { proposition += } return
-	 * null; }
-	 */
+	private ArrayList<Integer> cleanMemory() {
+		if (memPlayableFigures.isEmpty()) {
+			for (int i = 0; i <= config.getNbColors(); i++) {
+				memPlayableFigures.add(i);
+			}
+			nextPlayEnum = NextPlayEnum.NEW_COMBINIATION;
+		}
+		if ((present + rightPosition) == 0) {
+			int j;
+			for (int i = 0; i < config.getSolutionLength(); i++) {
+				j = lastPlayedPropostion.charAt(i) - 48;
+				if (memPlayableFigures.contains(j))
+					memPlayableFigures.remove(j);
+			}
+			nextPlayEnum = NextPlayEnum.NEW_COMBINIATION;
+		}
+		return memPlayableFigures;
+	}
+
+	private ArrayList<Integer> memoryOptimizer() {
+		/*
+		 * Prend la liste des coups jouer et la nettoi a la lumiere du dernier joué
+		 */
+		return memPlayableFigures;
+	}
+
+	private void memoryChecker() {
+		if (hold == false) {
+			if (present > previousPresent) {
+				this.addToSolution(newSwappedFigure, swappedPosition);
+				if (rightPosition < previousRightPosition)
+					this.addToPresent(previousSwappedFigure, swappedPosition);
+				else if (rightPosition == previousRightPosition)
+					this.removeFromPlayable(previousSwappedFigure);
+				else
+					System.out.println("erreur d'algo ligne 221");
+				nextPlayEnum = NextPlayEnum.MID_GAME_COMBINATION;
+			} else if (present < previousPresent) {
+				this.removeFromPlayable(previousSwappedFigure);
+				this.removeFromPlayable(newSwappedFigure);
+				nextPlayEnum = NextPlayEnum.MID_GAME_COMBINATION;
+			} else {
+				if (present > previousPresent) {
+					this.addToPresent(newSwappedFigure, swappedPosition);
+					this.removeFromPlayable(previousSwappedFigure);
+					nextPlayEnum = NextPlayEnum.MID_GAME_COMBINATION;
+				} else if (present < previousPresent) {
+					this.addToPresent(previousSwappedFigure, swappedPosition);
+					this.removeFromPlayable(previousSwappedFigure);
+					nextPlayEnum = NextPlayEnum.MID_GAME_COMBINATION;
+				} else {
+					nextPlayEnum = NextPlayEnum.TEST_WITH_TWO_FIGURES_SAME_TIME;
+					this.hold = true;
+				}
+			}
+		} else {
+			if (((present + rightPosition) == (previousPresent + previousRightPosition))
+					&& ((present + rightPosition) < (previousPresent + previousRightPosition))) {
+				this.removeFromPlayable(newSwappedFigure);
+				this.removeFromPlayable(previousSwappedFigure);
+			} else {
+				this.addToSolution(newSwappedFigure, swappedPosition);
+				this.addToSolution(previousSwappedFigure, swappedPosition);
+				hold = false;
+				nextPlayEnum = NextPlayEnum.MID_GAME_COMBINATION;
+			}
+		}
+	}
+
+	private void removeFromPlayable(int figure) {
+		// TODO Auto-generated method stub
+	}
+
+	private void removeFromMap(int figure) {
+		// TODO
+	}
+
+	private void addToSolution(int figure, int swappedPosition) {
+		this.memSolutionTab[swappedPosition] = figure;
+	}
+
+	private void addToPresent(int figure, int swappedPosition) {
+		// TODO
+	}
+
+	private String playMethod() {
+		String proposition = "";
+		switch (nextPlayEnum) {
+		case UNDEFINED:
+			System.out.println("erreur algo ligne 248");
+			break;
+		case NEW_COMBINIATION:
+			// Jouer X chiffre random qui appartienne a la table memPlayableFigure
+			break;
+		case MID_GAME_COMBINATION:
+			//
+			break;
+		case TEST_WITH_TWO_FIGURES_SAME_TIME:
+			// proposition = XXAN
+			/*
+			 */
+			if (swappedPosition == 0)
+				for (int i = 0; i < config.getSolutionLength(); i++) {
+					if (i == 1) {
+						proposition += previousSwappedFigure;
+					}
+					else proposition += lastPlayedPropostion.charAt(i);
+				}
+			else {
+				for (int i = 0; i < config.getSolutionLength(); i++) {
+					if (i == (swappedPosition - 1)) {
+						proposition += previousSwappedFigure;
+					}
+					else proposition += lastPlayedPropostion.charAt(i);
+				}
+			}
+			return proposition;
+		case FINAL_COMBINATION:
+			// Jouer les X chiffre de la table memSolutionTab
+			break;
+		}
+	}
 }
