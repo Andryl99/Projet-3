@@ -117,7 +117,6 @@ public class AIPlayerMastermind extends Player {
 	public String play(String correction) {
 		String proposition = "";
 
-
 		if (correction != "") {
 			present = correction.charAt(1) - 48;
 			rightPosition = correction.charAt(3) - 48;
@@ -156,16 +155,20 @@ public class AIPlayerMastermind extends Player {
 	}
 
 	private ArrayList<Integer> cleanMemory() {
+		// A déplacer dans le constructeur car ne s'execute qu'une fois
 		if (memPlayableFigures.isEmpty()) {
 			for (int i = 0; i <= config.getNbColors(); i++) {
 				memPlayableFigures.add(i);
 			}
 			nextPlayEnum = NextPlayEnum.NEW_COMBINIATION;
 		}
-		if ((present + rightPosition) == 0) {
-			int j;
+		// inversé la condition et utiliser return
+		if ((present + rightPosition) == 0)
+		// (present + rightPosition) == (previousPresent + previousRight)
+		{
+			Integer j;
 			for (int i = 0; i < config.getSolutionLength(); i++) {
-				j = lastPlayedPropostion.charAt(i) - 48;
+				j = Integer.parseInt(lastPlayedPropostion.substring(i, i + 1));
 				if (memPlayableFigures.contains(j))
 					memPlayableFigures.remove(j);
 			}
@@ -228,10 +231,6 @@ public class AIPlayerMastermind extends Player {
 		// TODO Auto-generated method stub
 	}
 
-	private void removeFromMap(int figure) {
-		// TODO
-	}
-
 	private void addToSolution(int figure, int swappedPosition) {
 		this.memSolutionTab[swappedPosition] = figure;
 	}
@@ -245,36 +244,35 @@ public class AIPlayerMastermind extends Player {
 		switch (nextPlayEnum) {
 		case UNDEFINED:
 			System.out.println("erreur algo ligne 248");
-			break;
+			return null;
 		case NEW_COMBINIATION:
-			// Jouer X chiffre random qui appartienne a la table memPlayableFigure
+			//
+
 			break;
 		case MID_GAME_COMBINATION:
-			//
+			// A définir
 			break;
 		case TEST_WITH_TWO_FIGURES_SAME_TIME:
-			// proposition = XXAN
-			/*
-			 */
 			if (swappedPosition == 0)
 				for (int i = 0; i < config.getSolutionLength(); i++) {
 					if (i == 1) {
 						proposition += previousSwappedFigure;
-					}
-					else proposition += lastPlayedPropostion.charAt(i);
+					} else
+						proposition += lastPlayedPropostion.charAt(i);
 				}
 			else {
 				for (int i = 0; i < config.getSolutionLength(); i++) {
 					if (i == (swappedPosition - 1)) {
 						proposition += previousSwappedFigure;
-					}
-					else proposition += lastPlayedPropostion.charAt(i);
+					} else
+						proposition += lastPlayedPropostion.charAt(i);
 				}
 			}
 			return proposition;
 		case FINAL_COMBINATION:
-			// Jouer les X chiffre de la table memSolutionTab
-			break;
+			for (int i = 0; i < config.getSolutionLength(); i++)
+				proposition += memSolutionTab[i];
+			return proposition;
 		}
 	}
 }
