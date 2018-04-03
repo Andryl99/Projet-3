@@ -32,11 +32,11 @@ public class HumanPlayerMastermind extends Player {
 	@Override
 	public String giveAnswer(String proposition, String solution) {
 		System.out.println("Corrigez la combinaison suivante : " + proposition + "\t\tSolution : " + solution);
-		System.out.print("Nombre de présents : ");
+		System.out.print("Correcte(s)   : ");
 		arePresents = this.inputErrorCheck(config.getSolutionLength(), config.getNbColors(), SequenceType.ISMASTERMINDCORRECTION);
-		System.out.print("Nombre de bien placé : ");
+		System.out.print("Bien placé(s) : ");
 		areAtRightPlace = this.inputErrorCheck(config.getSolutionLength(), config.getNbColors(), SequenceType.ISMASTERMINDCORRECTION);
-		return arePresents + " - " + areAtRightPlace;
+		return arePresents + " " + areAtRightPlace;
 	}
 
 //	public Pair<String, String> giveMastermindAnswer(String proposition, String solution) {

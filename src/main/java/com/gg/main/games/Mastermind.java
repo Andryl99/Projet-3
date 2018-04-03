@@ -22,7 +22,6 @@ public class Mastermind extends Game {
 
 	@Override
 	public void defensorAnswer() {
-		this.answer = defensor.giveAnswer(proposition, solution);	
-		System.out.println(solution);
+		this.answer = defensor.giveAnswer(proposition, solution);
 	}	
 }

@@ -10,15 +10,6 @@ public class PlayerFactory {
 		this.config = config;
 	}
 
-	// Voir si j'implemente ça...
-	// public Player getPlayer(int gameChoice, int modChoice) {
-	// return createPlayer(gameChoice, modChoice);
-	// }
-	//
-	// private Player createPlayer(int gameChoice, int modChoice) {
-	// return new Player();
-	// }
-
 	public APairOfPlayer getAPairOfPlayer(int gameChoice, int modChoice) {
 		return createAPairOfPlayer(gameChoice, modChoice);
 	}

@@ -16,7 +16,7 @@ public abstract class Player {
 	}
 	public abstract String selectSolution();
 	public abstract String giveAnswer(String proposition, String solution);
-	public abstract String play(String reponseh);
+	public abstract String play(String reponse);
 
 
 	public String inputErrorCheck(int solutionLength, int nbColors ,SequenceType sequence) {
