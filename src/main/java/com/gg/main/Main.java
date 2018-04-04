@@ -1,14 +1,15 @@
 package com.gg.main;
+
 import org.apache.logging.log4j.*;
 
 public class Main {
 
 	static final Logger logger = LogManager.getLogger();
-	
+
 	public static void main(String[] args) {
 		boolean devMod = true;
 		String firstArg;
-		
+
 		int gameChoice = -1;
 		int modChoice = -1;
 		int endGameChoice = -1;
@@ -29,6 +30,7 @@ public class Main {
 		//
 		// TODO pour l'instant le devmod n'est pas implement�
 		Menu menu = new Menu();
+
 		// menu.runMenu();
 
 		Launcher launcher = new Launcher(devMod);

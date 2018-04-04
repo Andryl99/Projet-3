@@ -15,11 +15,11 @@ public class ConfigurationClass {
 	
 	//
 	// Au final on remplacera ce constructeur ainsi que les setters par une lecture du fichier de configuration;
-	public ConfigurationClass(int nbTurns, int solutionLength, int nbColors, boolean devMod) {
+	public ConfigurationClass(int nbTurns, int solutionLength, int nbColors) {
 		setNbTurns(nbTurns);
 		setSolutionLength(solutionLength);
 		setNbColors(nbColors);
-		this.devMod = devMod;
+//		this.devMod = devMod;
 	}
 	
 	private void setNbTurns(int nbTurns) {

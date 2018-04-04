@@ -29,8 +29,9 @@ public class AIPlayerMastermind extends Player {
 		createPegsList();
 		minimumEliminationMap = new HashMap<String, Integer>();
 		possibleGuessesList = new ArrayList<String>();
-		// On utilise la méthode Mini Maxi si le nombre de couleur/digit n'est pas trop élevé;
-		useMinimaxMethod = (Math.pow(config.getNbColors(), config.getSolutionLength()) < 5000); 
+		// On utilise la méthode Mini Maxi si le nombre de couleur/digit n'est pas trop
+		// élevé;
+		useMinimaxMethod = (Math.pow(config.getNbColors(), config.getSolutionLength()) < 5000);
 	}
 
 	@Override
@@ -52,8 +53,8 @@ public class AIPlayerMastermind extends Player {
 	@Override
 	public String giveAnswer(String proposition, String solution) {
 		String correction = AIPlayerMastermind.Corrector(proposition, solution);
-		String correct = correction.substring(0,1);
-		String wellPlaced = correction.substring(2,3);
+		String correct = correction.substring(0, 1);
+		String wellPlaced = correction.substring(2, 3);
 		System.out.println("Correcte(s)   : " + correct);
 		System.out.println("Bien placé(s) : " + wellPlaced);
 		System.out.println(solution);
@@ -108,11 +109,12 @@ public class AIPlayerMastermind extends Player {
 
 	// methodes de play
 	private void memoryCleaner(String correction) {
-		
-//		int correct = Integer.parseInt(correction.substring(0, 1));
-//		int wellPlaced = Integer.parseInt(correction.substring(2, 3));
 
-		// Cette fonction retire de la Map candidateList l'ensemble des combinaisons qui ne coincide pas avec la correction si le dernier guess était solution
+		// int correct = Integer.parseInt(correction.substring(0, 1));
+		// int wellPlaced = Integer.parseInt(correction.substring(2, 3));
+
+		// Cette fonction retire de la Map candidateList l'ensemble des combinaisons qui
+		// ne coincide pas avec la correction si le dernier guess était solution
 		for (Iterator<String> iter = candidateList.listIterator(); iter.hasNext();) {
 			String candidateCode = iter.next();
 			if (!matchWithGuess(guess, candidateCode, correction)) {
@@ -125,11 +127,11 @@ public class AIPlayerMastermind extends Player {
 		// System.out.println(string);
 		// }
 	}
-	
+
 	private boolean matchWithGuess(String guess, String code, String correction) {
 		return AIPlayerMastermind.Corrector(guess, code).equals(correction);
 	}
-	
+
 	private String makeAStarterGuess() {
 		// On joue toujours 1122, 11222 ou 112222
 		guess = "11";
@@ -138,24 +140,19 @@ public class AIPlayerMastermind extends Player {
 		return guess;
 	}
 
-	private String makeAGuess() {
+	private void makeAGuess() {
 		if (useMinimaxMethod) {
 			// Méthode Minimax
 			resetMapsAndStuff();
 			setMinimumEliminationMap();
 			setPossibleGuessesList();
 			pickTheBestGuess();
-			return guess;
-		}
-		else {
+		} else {
 			// Méthode Random
 			Random random = new Random();
-			System.out.println("rand : " + random.nextInt(candidateList.size()));
-			System.out.println("list : " + candidateList.size());
 			guess = candidateList.get(random.nextInt(candidateList.size()));
 			// Une autre méthode consiste à prendre simplement le premier code de la liste
 			// guess = candidateList.get(0);
-			return guess;
 		}
 	}
 
@@ -176,12 +173,12 @@ public class AIPlayerMastermind extends Player {
 		// System.out.println(string);
 		// }
 	}
-	
+
 	private void resetMapsAndStuff() {
 		minimumEliminationMap.clear();
 		possibleGuessesList.clear();
 	}
-	
+
 	private void setMinimumEliminationMap() {
 
 		int amountOfElimitatedCodes = 0;
@@ -202,7 +199,7 @@ public class AIPlayerMastermind extends Player {
 			listOfAmounts.clear();
 		}
 	}
-	
+
 	private void setPossibleGuessesList() {
 		int minimax = 0;
 		ArrayList<Integer> minimumEliminationList = new ArrayList<Integer>();
@@ -227,27 +224,26 @@ public class AIPlayerMastermind extends Player {
 		for (String code : possibleGuessesList) {
 			if (candidateList.contains(code)) {
 				bestGuessesList.add(code);
-//				System.out.println("a solution from the candidate list will be played");
+				// System.out.println("a solution from the candidate list will be played");
 			}
 		}
 		if (bestGuessesList.isEmpty()) {
 			bestGuessesList = new ArrayList<String>(possibleGuessesList);
-//			System.out.println("a solution from full code list will be played");
+			// System.out.println("a solution from full code list will be played");
 		}
 
-//		System.out.println("**** possibleList ****");
-//		for (String string : possibleGuessesList) {
-//			System.out.println(string);
-//		}
-		System.out.println("**** minimaxedList ****");
-		for (String string : bestGuessesList) {
-			System.out.println(string);
-		}
-		// erreur
-		// guess = possibleGuessesList.get(0);
+		// System.out.println("**** possibleList ****");
+		// for (String string : possibleGuessesList) {
+		// System.out.println(string);
+		// }
+		// System.out.println("**** minimaxedList ****");
+		// for (String string : bestGuessesList) {
+		// System.out.println(string);
+		// }
+		
 		guess = bestGuessesList.get(0);
 	}
-	
+
 	public static String Corrector(String guess, String code) {
 
 		String str = "";
@@ -256,7 +252,7 @@ public class AIPlayerMastermind extends Player {
 
 		Map<Character, Integer> propositionMap;
 		Map<Character, Integer> solutionMap;
-		
+
 		for (int i = 0; i < code.length(); i++) {
 
 			for (int j = 0; j < code.length(); j++) {
@@ -299,7 +295,7 @@ public class AIPlayerMastermind extends Player {
 		 */
 		correct -= wellPlaced;
 
-		str =  correct + " " + wellPlaced;
+		str = correct + " " + wellPlaced;
 		return str;
 	}
 

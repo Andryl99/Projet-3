@@ -2,18 +2,23 @@ package com.gg.main;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.gg.main.games.Game;
 import com.gg.main.games.GameFactory;
 
 public class Launcher {
 	
+	static final Logger logger = LogManager.getLogger();
 	private ConfigurationClass config;
 	private GameFactory gameFactory;
 	private Game lastGame;
 	
 	public Launcher(boolean devMod) {
-		// constructeur (Nb de tours, Nb de chiffre dans la solution, nombre de couleurs dans le mastermind)
-		this.config = new ConfigurationClass(8, 4, 7, devMod);
+		ConfigurationClassFactory configclassfacto = new ConfigurationClassFactory();
+		this.config = configclassfacto.getConfigurationClass();
+//		this.config = new ConfigurationClass(8, 4, 7, devMod);
 		this.gameFactory = new GameFactory(config);
 	}
 	
@@ -46,10 +51,10 @@ public class Launcher {
 			case AUCUNGAGNANT:
 				break;
 			case ATTAQUANTGAGNE:
-				System.out.println("Attaquant gagne!");
+				logger.info("Attaquant gagne!");
 				break;
 			case DEFENSEURGAGNE:
-				System.out.println("Défenseur gagne!");
+				logger.info("Défenseur gagne!");
 				break;
 			default :
 				break; 
