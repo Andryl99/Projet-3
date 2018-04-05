@@ -13,10 +13,10 @@ import org.apache.logging.log4j.Logger;
 public class ConfigurationClassFactory {
 
 	static final Logger logger = LogManager.getLogger();
-	ConfigurationClass config;
-	String nbTurns;
-	String solutionLength;
-	String nbColors;
+	private ConfigurationClass config;
+	private String nbTurns;
+	private String solutionLength;
+	private String nbColors;
 
 	public ConfigurationClassFactory() {
 		this.nbTurns = "";

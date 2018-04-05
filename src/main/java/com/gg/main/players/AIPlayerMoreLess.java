@@ -26,7 +26,7 @@ public class AIPlayerMoreLess extends Player {
 			upperBoundTab[i] = 10;
 		}
 	}
-	
+
 	@Override
 	public String selectSolution() {
 
@@ -40,15 +40,15 @@ public class AIPlayerMoreLess extends Player {
 			solution += String.valueOf(nbRandom);
 		}
 		logger.info("l'AI a selectionné une combinaison de " + config.getSolutionLength() + " chiffres.\n");
+		logger.debug("Solution : " + solution + "\n");
 		return solution;
 	}
 
 	@Override
 	public String giveAnswer(String proposition, String solution) {
-		 String correction =  AIPlayerMoreLess.Corrector(proposition, solution);
-		 logger.info("Correction : " + correction + "\n");
-		 logger.debug("Solution : " + solution + "\n");
-		 return correction;
+		String correction = AIPlayerMoreLess.Corrector(proposition, solution);
+		logger.info("Correction : " + correction + "\n");
+		return correction;
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class AIPlayerMoreLess extends Player {
 					currentTab[i] = (upperBoundTab[i] + lowerBoundTab[i]) / 2;
 				} else {
 					currentTab[i]++;
-					//remplacer par une exeption
+					// remplacer par une exeption
 				}
 
 			} else if (correction.charAt(i) == '-') {
@@ -87,6 +87,7 @@ public class AIPlayerMoreLess extends Player {
 		}
 		return proposition;
 	}
+
 	public static String Corrector(String guess, String code) {
 		int digitProp;
 		int digitSol;
@@ -107,7 +108,7 @@ public class AIPlayerMoreLess extends Player {
 
 		return verification;
 	}
-	
+
 	public String toString() {
 		return "joueur AI";
 	}

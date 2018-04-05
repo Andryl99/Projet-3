@@ -22,7 +22,6 @@ public class HumanPlayerMoreLess extends Player {
 	@Override
 	public String giveAnswer(String proposition, String solution) {
 		logger.info("Corrigez la combinaison suivante : " + proposition + "\n");
-		logger.debug("Solution" + solution + "\n");
 		logger.info("Correction : ");
 		return this.inputErrorCheck(config.getSolutionLength(), 10, SequenceType.ISCORRECTION);
 	}

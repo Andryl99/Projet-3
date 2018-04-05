@@ -46,6 +46,7 @@ public class Menu {
 		// ne pas quiiter la  méthode tant que le choix est -1
 		int choix = -1;
 		logger.info("Choix : ");
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		try {
 			choix = scanner.nextInt();

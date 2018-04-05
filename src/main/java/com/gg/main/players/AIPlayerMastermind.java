@@ -10,7 +10,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.gg.main.ConfigurationClass;
-import com.gg.main.Launcher;
 
 public class AIPlayerMastermind extends Player {
 
@@ -35,7 +34,7 @@ public class AIPlayerMastermind extends Player {
 		minimumEliminationMap = new HashMap<String, Integer>();
 		possibleGuessesList = new ArrayList<String>();
 		// On utilise la méthode Mini Maxi si le nombre de couleur/digit n'est pas trop
-		// élevé;
+		// élevé
 		useMinimaxMethod = (Math.pow(config.getNbColors(), config.getSolutionLength()) < 5000);
 	}
 
@@ -52,6 +51,7 @@ public class AIPlayerMastermind extends Player {
 		}
 		logger.info("L'AI a selectionné une combinaison de " + config.getSolutionLength() + " chiffres.\n");
 		logger.info("Cette combinaison contient des chiffres entre 0 et " + (config.getNbColors() - 1) + ".\n");
+		logger.debug("Solution : " + solution + "\n");
 		return solution;
 	}
 
@@ -62,7 +62,6 @@ public class AIPlayerMastermind extends Player {
 		String wellPlaced = correction.substring(2, 3);
 		logger.info("Correcte(s)   : " + correct + "\n");
 		logger.info("Bien placé(s) : " + wellPlaced + "\n");
-		logger.debug("Solution : "  + solution + "\n");
 		return correction;
 	}
 
@@ -115,14 +114,11 @@ public class AIPlayerMastermind extends Player {
 	// methodes de play
 	private void memoryCleaner(String correction) {
 
-		// int correct = Integer.parseInt(correction.substring(0, 1));
-		// int wellPlaced = Integer.parseInt(correction.substring(2, 3));
-
 		// Cette fonction retire de la Map candidateList l'ensemble des combinaisons qui
 		// ne coincide pas avec la correction si le dernier guess était solution
 		for (Iterator<String> iter = candidateList.listIterator(); iter.hasNext();) {
 			String candidateCode = iter.next();
-			if (!matchWithGuess(guess, candidateCode, correction)) {
+			if (!matchWithGuess(candidateCode, guess, correction)) {
 				iter.remove();
 			}
 		}
@@ -245,7 +241,7 @@ public class AIPlayerMastermind extends Player {
 		// for (String string : bestGuessesList) {
 		// System.out.println(string);
 		// }
-		
+
 		guess = bestGuessesList.get(0);
 	}
 
@@ -279,8 +275,8 @@ public class AIPlayerMastermind extends Player {
 		propositionMap = AIPlayerMastermind.createMap(guess);
 
 		/*
-		 * On test chaque entrée de la map solution Si on retrouve un chiffre en commun
-		 * on va chercher les valeurs associés on garde la plus petite des deux valeur
+		 * On test chaque entrée de la map solution, si on retrouve un chiffre en commun
+		 * on va chercher les valeurs associées on garde la plus petite des deux valeurs
 		 * (qui correspond au nombre de correspondances solution / proposition)
 		 * 
 		 */
@@ -303,9 +299,8 @@ public class AIPlayerMastermind extends Player {
 		str = correct + " " + wellPlaced;
 		return str;
 	}
-	
+
 	public String toString() {
 		return "joueur AI";
 	}
-
 }

@@ -36,10 +36,8 @@ public class GameFactory {
 		}
 
 		
-		// Desormais j'utlise getReversedPlayers qui ne détériore pas l'objet original
 		if (reverserFlag == true) {
 			aPairOfPlayer = aPairOfPlayer.getReversedPlayers();
-			// aPairOfPlayer.reversePlayers();
 		}
 
 

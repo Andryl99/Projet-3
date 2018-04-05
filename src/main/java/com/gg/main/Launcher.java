@@ -50,8 +50,7 @@ public class Launcher {
 			}
 		} while (!isLastTurn);
 
-		// TODO ... est buggé en duel, récupérer des données sur le derniers jeu, pour
-		// determiné le nom du vainqueur
+		//
 		switch (lastGame.stateOfGame()) {
 		case AUCUNGAGNANT:
 			break;

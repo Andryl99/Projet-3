@@ -36,7 +36,6 @@ public class HumanPlayerMastermind extends Player {
 	@Override
 	public String giveAnswer(String proposition, String solution) {
 		logger.info("Corrigez la combinaison suivante : " + proposition + "\n");
-		logger.debug("Solution : " + solution +"\n");
 		logger.info("Correcte(s)   : ");
 		arePresents = this.inputErrorCheck(config.getSolutionLength(), config.getNbColors(), SequenceType.ISMASTERMINDCORRECTION);
 		logger.info("Bien placé(s) : ");
