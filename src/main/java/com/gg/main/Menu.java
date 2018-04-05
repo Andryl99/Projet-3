@@ -45,42 +45,42 @@ public class Menu {
 	public int intInput() {
 		// ne pas quiiter la  méthode tant que le choix est -1
 		int choix = -1;
-		System.out.print("Choix : ");
+		logger.info("Choix : ");
 		Scanner scanner = new Scanner(System.in);
 		try {
 			choix = scanner.nextInt();
 
 		} catch (InputMismatchException e) {
-			System.out.println("Erreur de saisie, recommencez");
+			logger.warn("Erreur de saisie, recommencez\n");
 		}
 		return choix;
 	}
 
 	// Des méthodes simple pour
 	public void displayMenuHeader() {
-		logger.info("multi-jeux");
+		logger.info("multi-jeux\n");
 	}
 
 	public void displayGameList() {
-		logger.info("--------------------");
-		logger.info("Choisissez un jeu");
-		logger.info("1 - Jeu du Plus ou Moins");
-		logger.info("2 - Mastermind");
+		logger.info("--------------------\n");
+		logger.info("Choisissez un jeu\n");
+		logger.info("1 - Jeu du Plus ou Moins\n");
+		logger.info("2 - Mastermind\n");
 	}
 
 	public void displayModList() {
-		logger.info("--------------------");
-		logger.info("Choisissez un mode");
-		logger.info("1 - Challenger");
-		logger.info("2 - Defenseur");
-		logger.info("3 - Duel");
+		logger.info("--------------------\n");
+		logger.info("Choisissez un mode\n");
+		logger.info("1 - Challenger\n");
+		logger.info("2 - Defenseur\n");
+		logger.info("3 - Duel\n");
 	}
 
 	public void displayEndGameMenu() {
-		logger.info("--------------------");
-		logger.info("Voulez vous :");
-		logger.info("1 - Rejouer");
-		logger.info("2 - Retourner au menu");
-		logger.info("3 - Quitter l'application ?");
+		logger.info("--------------------\n");
+		logger.info("Voulez vous :\n");
+		logger.info("1 - Rejouer\n");
+		logger.info("2 - Retourner au menu\n");
+		logger.info("3 - Quitter l'application ?\n");
 	}
 }

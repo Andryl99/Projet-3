@@ -2,10 +2,14 @@ package com.gg.main.players;
 
 import java.util.Random;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.gg.main.ConfigurationClass;
 
 public class AIPlayerMoreLess extends Player {
 
+	static Logger logger = LogManager.getLogger();
 	private int[] currentTab;
 	private int[] lowerBoundTab;
 	private int[] upperBoundTab;
@@ -35,13 +39,16 @@ public class AIPlayerMoreLess extends Player {
 			nbRandom = rand.nextInt(max - min + 1) + min;
 			solution += String.valueOf(nbRandom);
 		}
-		System.out.println("l'AI a selectionné une combinaison de " + config.getSolutionLength() + " chiffres.");
+		logger.info("l'AI a selectionné une combinaison de " + config.getSolutionLength() + " chiffres.\n");
 		return solution;
 	}
 
 	@Override
 	public String giveAnswer(String proposition, String solution) {
-		return null;
+		 String correction =  AIPlayerMoreLess.Corrector(proposition, solution);
+		 logger.info("Correction : " + correction + "\n");
+		 logger.debug("Solution : " + solution + "\n");
+		 return correction;
 	}
 
 	@Override
@@ -79,5 +86,29 @@ public class AIPlayerMoreLess extends Player {
 
 		}
 		return proposition;
+	}
+	public static String Corrector(String guess, String code) {
+		int digitProp;
+		int digitSol;
+		String verification = "";
+
+		for (int i = 0; i < guess.length(); i++) {
+
+			digitProp = Integer.parseInt(String.valueOf(guess.charAt(i)));
+			digitSol = Integer.parseInt(String.valueOf(code.charAt(i)));
+
+			if (digitProp == digitSol)
+				verification += "=";
+			else if (digitProp < digitSol)
+				verification += "+";
+			else if (digitProp > digitSol)
+				verification += "-";
+		}
+
+		return verification;
+	}
+	
+	public String toString() {
+		return "joueur AI";
 	}
 }

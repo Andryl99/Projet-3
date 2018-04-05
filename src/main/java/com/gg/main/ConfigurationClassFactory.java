@@ -7,15 +7,16 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
 
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class ConfigurationClassFactory {
 
+	static final Logger logger = LogManager.getLogger();
 	ConfigurationClass config;
 	String nbTurns;
 	String solutionLength;
 	String nbColors;
-	Logger logger;
 
 	public ConfigurationClassFactory() {
 		this.nbTurns = "";
@@ -36,17 +37,17 @@ public class ConfigurationClassFactory {
 			prop.setProperty("solutionLength", solutionLength);
 			prop.setProperty("nbColors", nbColors);
 
-			// save properties to project root folder
+			// save properties
 			prop.store(output, null);
 
 		} catch (IOException io) {
-			io.printStackTrace();
+			logger.fatal(io.toString());
 		} finally {
 			if (output != null) {
 				try {
 					output.close();
 				} catch (IOException e) {
-					e.printStackTrace();
+					logger.fatal(e.toString());
 				}
 			}
 		}
@@ -69,13 +70,13 @@ public class ConfigurationClassFactory {
 			nbColors = prop.getProperty("nbColors");
 
 		} catch (IOException ex) {
-			ex.printStackTrace();
+			logger.fatal(ex.toString());
 		} finally {
 			if (input != null) {
 				try {
 					input.close();
 				} catch (IOException e) {
-					e.printStackTrace();
+					logger.fatal(e.toString());
 				}
 			}
 		}
@@ -88,6 +89,8 @@ public class ConfigurationClassFactory {
 			solutionLength.isEmpty(); 
 			nbTurns.isEmpty();
 		} catch (NullPointerException e) {
+			// Ecriture des valeur par défaut
+			logger.error("config.properties looks empty, default values will be writen. e : " + e.toString() + "\n");
 			writeProperties("10", "4", "6");
 			loadProperties();
 		}

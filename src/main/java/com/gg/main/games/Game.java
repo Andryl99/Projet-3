@@ -4,15 +4,6 @@ import com.gg.main.players.Player;
 
 public abstract class Game {
 
-	/*
-	 * 
-	 *  SolutionLength ne sert pas ici
-	 *  
-	 *  Le devMod pourrai etre utilisé dans cette classe
-	 * 
-	 * 
-	 * 
-	 */
 	protected int solutionLength;
 	protected int nbTurns;
 	protected int turnCounter;
@@ -60,5 +51,17 @@ public abstract class Game {
 		this.solution = "";
 		this.answer = "";
 		this.proposition = "";
+	}
+	
+	public Player getAttacker() {
+		return attacker;
+	}
+	
+	public Player getDefensor() {
+		return defensor;
+	}
+	
+	public int getTurnCounter() {
+		return turnCounter;
 	}
 }

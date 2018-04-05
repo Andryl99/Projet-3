@@ -6,10 +6,15 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.gg.main.ConfigurationClass;
+import com.gg.main.Launcher;
 
 public class AIPlayerMastermind extends Player {
 
+	static final Logger logger = LogManager.getLogger();
 	private Random rand = new Random();
 	private String guess;
 	private ArrayList<String> candidateList;
@@ -45,8 +50,8 @@ public class AIPlayerMastermind extends Player {
 			nbRandom = rand.nextInt(max - min + 1) + min;
 			solution += String.valueOf(nbRandom);
 		}
-		System.out.println("L'AI a selectionné une combinaison de " + config.getSolutionLength() + " chiffres.");
-		System.out.println("Cette combinaison contient des chiffres entre 0 et " + (config.getNbColors() - 1) + ".");
+		logger.info("L'AI a selectionné une combinaison de " + config.getSolutionLength() + " chiffres.\n");
+		logger.info("Cette combinaison contient des chiffres entre 0 et " + (config.getNbColors() - 1) + ".\n");
 		return solution;
 	}
 
@@ -55,9 +60,9 @@ public class AIPlayerMastermind extends Player {
 		String correction = AIPlayerMastermind.Corrector(proposition, solution);
 		String correct = correction.substring(0, 1);
 		String wellPlaced = correction.substring(2, 3);
-		System.out.println("Correcte(s)   : " + correct);
-		System.out.println("Bien placé(s) : " + wellPlaced);
-		System.out.println(solution);
+		logger.info("Correcte(s)   : " + correct + "\n");
+		logger.info("Bien placé(s) : " + wellPlaced + "\n");
+		logger.debug("Solution : "  + solution + "\n");
 		return correction;
 	}
 
@@ -297,6 +302,10 @@ public class AIPlayerMastermind extends Player {
 
 		str = correct + " " + wellPlaced;
 		return str;
+	}
+	
+	public String toString() {
+		return "joueur AI";
 	}
 
 }

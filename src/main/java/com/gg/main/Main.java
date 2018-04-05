@@ -7,7 +7,7 @@ public class Main {
 	static final Logger logger = LogManager.getLogger();
 
 	public static void main(String[] args) {
-		boolean devMod = true;
+		boolean devMod = false;
 		String firstArg;
 
 		int gameChoice = -1;

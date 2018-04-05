@@ -3,12 +3,16 @@ package com.gg.main.players;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.gg.main.ConfigurationClass;
 import com.gg.main.Regex;
 
 public abstract class Player {
 	protected ConfigurationClass config;
 	protected Scanner scanner = new Scanner(System.in);
+	static final Logger logger = LogManager.getLogger();
 	
 	public Player (ConfigurationClass config) {
 		this.config = config;
@@ -17,7 +21,7 @@ public abstract class Player {
 	public abstract String selectSolution();
 	public abstract String giveAnswer(String proposition, String solution);
 	public abstract String play(String reponse);
-
+	public abstract String toString();
 
 	public String inputErrorCheck(int solutionLength, int nbColors ,SequenceType sequence) {
 		String str = "";
@@ -25,13 +29,13 @@ public abstract class Player {
 			try {
 				str = scanner.nextLine();
 			} catch (InputMismatchException e) {
-				System.out.print("Erreur de saisie, recommencez : ");
+				logger.warn("Erreur de saisie, recommencez : ");
 			}
 
 			if (Regex.isValidCombination(str, solutionLength, nbColors, sequence)) {
 				break;
 			} else {
-				System.out.print("Erreur de saisie, recommencez : ");
+				logger.warn("Erreur de saisie, recommencez : ");
 			}
 		}
 		return str;

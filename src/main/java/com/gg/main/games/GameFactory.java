@@ -3,12 +3,16 @@ package com.gg.main.games;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.gg.main.ConfigurationClass;
 import com.gg.main.players.APairOfPlayer;
 import com.gg.main.players.PlayerFactory;
 
 public class GameFactory {
-
+	
+	static final Logger logger = LogManager.getLogger();
 	private ConfigurationClass config;
 	private PlayerFactory playerFactory;
 	private APairOfPlayer aPairOfPlayer;
@@ -25,8 +29,11 @@ public class GameFactory {
 
 	private Game createGame(int gameChoice, int modChoice, boolean reverserFlag) throws IllegalArgumentException {
 		// On leve une possible exception a la creation des joueurs
-		
+		try {
 		aPairOfPlayer = playerFactory.getAPairOfPlayer(gameChoice, modChoice);
+		} catch (IllegalArgumentException e) { 
+			logger.fatal(e.toString());
+		}
 
 		
 		// Desormais j'utlise getReversedPlayers qui ne détériore pas l'objet original
@@ -61,7 +68,7 @@ public class GameFactory {
 		if (modChoice == 3)
 			listOfGames.add(getGame(gameChoice, modChoice, true));
 		} catch (IllegalArgumentException e) { 
-			e.printStackTrace();
+			logger.fatal(e.toString());
 		}
 		return listOfGames;
 	}

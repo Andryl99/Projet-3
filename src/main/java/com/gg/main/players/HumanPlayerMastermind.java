@@ -1,9 +1,13 @@
 package com.gg.main.players;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.gg.main.ConfigurationClass;
 
 public class HumanPlayerMastermind extends Player {
 
+	static Logger logger = LogManager.getLogger();
 	protected String arePresents;
 	protected String areAtRightPlace;
 
@@ -13,7 +17,7 @@ public class HumanPlayerMastermind extends Player {
 
 	@Override
 	public String selectSolution() {
-		System.out.print("Entrez une combinaison de " + config.getSolutionLength() + " chiffres de 0 à "+ (config.getNbColors()-1) +" : ");
+		logger.info("Entrez une combinaison de " + config.getSolutionLength() + " chiffres de 0 à "+ (config.getNbColors()-1) +" : ");
 		return this.inputErrorCheck(config.getSolutionLength(), config.getNbColors(), SequenceType.ISCOMBINATION);
 	}
 
@@ -31,10 +35,11 @@ public class HumanPlayerMastermind extends Player {
 	 * */
 	@Override
 	public String giveAnswer(String proposition, String solution) {
-		System.out.println("Corrigez la combinaison suivante : " + proposition + "\t\tSolution : " + solution);
-		System.out.print("Correcte(s)   : ");
+		logger.info("Corrigez la combinaison suivante : " + proposition + "\n");
+		logger.debug("Solution : " + solution +"\n");
+		logger.info("Correcte(s)   : ");
 		arePresents = this.inputErrorCheck(config.getSolutionLength(), config.getNbColors(), SequenceType.ISMASTERMINDCORRECTION);
-		System.out.print("Bien placé(s) : ");
+		logger.info("Bien placé(s) : ");
 		areAtRightPlace = this.inputErrorCheck(config.getSolutionLength(), config.getNbColors(), SequenceType.ISMASTERMINDCORRECTION);
 		return arePresents + " " + areAtRightPlace;
 	}
@@ -51,7 +56,10 @@ public class HumanPlayerMastermind extends Player {
 
 	@Override
 	public String play(String reponse) {
-		System.out.print("Proposition : ");
+		logger.info("Proposition : ");
 		return this.inputErrorCheck(config.getSolutionLength(), config.getNbColors(), SequenceType.ISCOMBINATION);
+	}
+	public String toString() {
+		return "joueur humain";
 	}
 }
