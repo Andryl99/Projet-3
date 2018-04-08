@@ -1,4 +1,4 @@
-### Projet-3 : Mastermind/Jeu du plus et du moins.  
+# Projet-3 : Mastermind/Jeu du plus et du moins.  
 
 	
 ## A propos  
@@ -26,9 +26,6 @@ Avant la compilation rendez-vous dans
 
 La méthode inspirée de l'algorythme de knuth (IA du mastermind) prend trop de temps a l'execution, son comportement est donc modifié (moins efficace) dès lors qu'un nombre important de couleurs/digits est configuré.
 
-
-## Historique  
-
-Version 0.1.0 (Avril 2018)  
-	- Version complète de l'application.  
-	- ajout d'un logger et d'un fichier configuration.  
+## Historique
+Version 1(Avril 2018)
+- Version complète de l'application.

@@ -26,17 +26,6 @@ public class ConfigurationClassFactory {
 
 	public ConfigurationClass getConfigurationClass() {
 		loadProperties();
-		// try{
-		// nbColors.isEmpty();
-		// solutionLength.isEmpty();
-		// nbTurns.isEmpty();
-		// } catch (NullPointerException e) {
-		// // Ecriture des valeur par défaut
-		// logger.warn("config.properties looks empty, default values will be writen. e
-		// : " + e.toString() + "\n");
-		// writeProperties("10", "4", "6");
-		// loadProperties();
-		// }
 		config = new ConfigurationClass(Integer.parseInt(nbTurns), Integer.parseInt(solutionLength),
 				Integer.parseInt(nbColors));
 		writeProperties(nbTurns, solutionLength, nbColors);

@@ -4,7 +4,6 @@ public class ConfigurationClass {
 	private int nbTurns;
 	private int solutionLength;
 	private int nbColors;
-	private boolean devMod;
 
 	
 	public ConfigurationClass(int nbTurns, int solutionLength, int nbColors) {

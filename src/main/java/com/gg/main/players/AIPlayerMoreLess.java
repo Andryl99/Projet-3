@@ -9,7 +9,7 @@ import com.gg.main.ConfigurationClass;
 
 public class AIPlayerMoreLess extends Player {
 
-	static Logger logger = LogManager.getLogger();
+	static final Logger logger = LogManager.getLogger();
 	private int[] currentTab;
 	private int[] lowerBoundTab;
 	private int[] upperBoundTab;
