@@ -20,7 +20,6 @@ public class Launcher {
 	public Launcher(boolean devMod) {
 		ConfigurationClassFactory configclassfacto = new ConfigurationClassFactory();
 		this.config = configclassfacto.getConfigurationClass();
-		// this.config = new ConfigurationClass(8, 4, 7, devMod);
 		this.gameFactory = new GameFactory(config);
 		if (devMod)
 			Configurator.setRootLevel(Level.DEBUG);

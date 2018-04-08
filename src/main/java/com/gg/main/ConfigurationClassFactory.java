@@ -41,13 +41,13 @@ public class ConfigurationClassFactory {
 			prop.store(output, null);
 
 		} catch (IOException io) {
-			logger.fatal(io.toString());
+			logger.fatal(io.getMessage());
 		} finally {
 			if (output != null) {
 				try {
 					output.close();
 				} catch (IOException e) {
-					logger.fatal(e.toString());
+					logger.fatal(e.getMessage());
 				}
 			}
 		}
@@ -65,18 +65,18 @@ public class ConfigurationClassFactory {
 			prop.load(input);
 
 			// get the property value and print it out
-			nbTurns = prop.getProperty("nbTurns");
-			solutionLength = prop.getProperty("solutionLength");
-			nbColors = prop.getProperty("nbColors");
-
+			nbTurns = prop.getProperty("nbTurns" , "10");
+			solutionLength = prop.getProperty("solutionLength" , "4");
+			nbColors = prop.getProperty("nbColors", "6");
+			
 		} catch (IOException ex) {
-			logger.fatal(ex.toString());
+			logger.fatal(ex.getMessage());
 		} finally {
 			if (input != null) {
 				try {
 					input.close();
 				} catch (IOException e) {
-					logger.fatal(e.toString());
+					logger.fatal(e.getMessage());
 				}
 			}
 		}
@@ -84,17 +84,18 @@ public class ConfigurationClassFactory {
 
 	public ConfigurationClass getConfigurationClass() {
 		loadProperties();
-		try{
-			nbColors.isEmpty();
-			solutionLength.isEmpty(); 
-			nbTurns.isEmpty();
-		} catch (NullPointerException e) {
-			// Ecriture des valeur par défaut
-			logger.error("config.properties looks empty, default values will be writen. e : " + e.toString() + "\n");
-			writeProperties("10", "4", "6");
-			loadProperties();
-		}
+//		try{
+//			nbColors.isEmpty();
+//			solutionLength.isEmpty(); 
+//			nbTurns.isEmpty();
+//		} catch (NullPointerException e) {
+//			// Ecriture des valeur par défaut
+//			logger.warn("config.properties looks empty, default values will be writen. e : " + e.toString() + "\n");
+//			writeProperties("10", "4", "6");
+//			loadProperties();
+//		}
 		config = new ConfigurationClass(Integer.parseInt(nbTurns),Integer.parseInt(solutionLength),Integer.parseInt(nbColors));
+		writeProperties(nbTurns, solutionLength, nbColors);
 		return config;
 	}
 }
