@@ -27,11 +27,8 @@ public class Main {
 
 			} catch (Exception e) {
 			}
-		//
-		// TODO pour l'instant le devmod n'est pas implement�
-		Menu menu = new Menu();
 
-		// menu.runMenu();
+		Menu menu = new Menu();
 
 		Launcher launcher = new Launcher(devMod);
 		do {
