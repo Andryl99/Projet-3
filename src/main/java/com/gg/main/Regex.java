@@ -4,10 +4,6 @@ import com.gg.main.players.SequenceType;
 
 public class Regex {
 
-	/*
-	 * S'applique désormais a mastermind
-	 * 
-	 */
 	public static boolean isValidCombination(String combination, int solutionLength, int nbColors,
 			SequenceType sequence) {
 		String regExp;

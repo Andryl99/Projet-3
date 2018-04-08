@@ -26,9 +26,9 @@ public abstract class Game {
 	
 	public abstract void defensorSelectSolution();
 
-	public abstract void attackerPlay();
+	protected abstract void attackerPlay();
 
-	public abstract void defensorAnswer();
+	protected abstract void defensorAnswer();
 	
 	public EndGameState stateOfGame() {
 		if (proposition.equals(solution))

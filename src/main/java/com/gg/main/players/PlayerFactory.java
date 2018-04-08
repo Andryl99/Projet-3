@@ -10,11 +10,7 @@ public class PlayerFactory {
 		this.config = config;
 	}
 
-	public APairOfPlayer getAPairOfPlayer(int gameChoice, int modChoice) {
-		return createAPairOfPlayer(gameChoice, modChoice);
-	}
-
-	private APairOfPlayer createAPairOfPlayer(int gameChoice, int modChoice) throws IllegalArgumentException {
+	public APairOfPlayer getAPairOfPlayer(int gameChoice, int modChoice) throws IllegalArgumentException {
 		if (gameChoice == 1) {
 			switch (modChoice) {
 			case 1:
@@ -24,19 +20,20 @@ public class PlayerFactory {
 			case 3:
 				return new APairOfPlayer(new HumanPlayerMoreLess(config), new AIPlayerMoreLess(config));
 			default:
-				throw new IllegalArgumentException("Programming error, modChoice is "+ modChoice + " and should be 1, 2 or 3. Game received a null pointer");
+				throw new IllegalArgumentException("Programming error, modChoice is " + modChoice
+						+ " and should be 1, 2 or 3. Game received a null pointer");
 			}
-		}
-		else {
+		} else {
 			switch (modChoice) {
-			case 1 :
+			case 1:
 				return new APairOfPlayer(new HumanPlayerMastermind(config), new AIPlayerMastermind(config));
-			case 2 :
+			case 2:
 				return new APairOfPlayer(new AIPlayerMastermind(config), new HumanPlayerMastermind(config));
-			case 3 :
+			case 3:
 				return new APairOfPlayer(new HumanPlayerMastermind(config), new AIPlayerMastermind(config));
-			default :
-				throw new IllegalArgumentException("Programming error, modChoice is "+ modChoice + " and should be 1, 2 or 3. Game received a null pointer");
+			default:
+				throw new IllegalArgumentException("Programming error, modChoice is " + modChoice
+						+ " and should be 1, 2 or 3. Game received a null pointer");
 			}
 		}
 	}

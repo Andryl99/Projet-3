@@ -56,11 +56,6 @@ public class Menu {
 		return choix;
 	}
 
-	// Des méthodes simple pour
-	private void displayMenuHeader() {
-		logger.info("multi-jeux\n");
-	}
-
 	private void displayGameList() {
 		logger.info("--------------------\n");
 		logger.info("Choisissez un jeu\n");
