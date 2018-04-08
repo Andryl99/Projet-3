@@ -1,4 +1,3 @@
-***************************************************************\
 
 	Projet-3 : Mastermind/Jeu du plus et du moins.
 
@@ -12,9 +11,8 @@ Cette application propose d'affronter une IA sur les deux jeux que sont "le plus
 
 	
 ****************** Compilation et lancement  ******************\
-Le code source se trouve ici : 
-https://github.com/xxjokerx/Projet-3
-Ce application à été développé sous Java 1.8, équipez vous de Java 8 ou ultérieur
+Le code source se trouve ici : https://github.com/xxjokerx/Projet-3
+Cette application à été développé sous Java 8, équipez vous de Java 8 ou ultérieur.
 
 Sous Eclipse JavaEE IDE :
 Avant la compilation rendez-vous dans 
@@ -31,6 +29,3 @@ La méthode inspirée de l'algorythme de knuth (IA du mastermind) prend trop de te
 Version 0.1.0 (Avril 2018)
 	- Version complète du logiciel
 	- ajout d'un logger et d'un fichier configuration
-
-	
-***************************************************************\
