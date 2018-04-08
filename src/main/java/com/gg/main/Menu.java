@@ -8,7 +8,6 @@ import org.apache.logging.log4j.Logger;
 
 public class Menu {
 
-	// Consultation du fichier config, PEUT ETRE mieux dans main
 	static final Logger logger = LogManager.getLogger();
 	
 	public Menu() {	}
@@ -42,7 +41,7 @@ public class Menu {
 		return endGameChoice;
 	}
 	
-	public int intInput() {
+	private int intInput() {
 		// ne pas quiiter la  méthode tant que le choix est -1
 		int choix = -1;
 		logger.info("Choix : ");
@@ -58,18 +57,18 @@ public class Menu {
 	}
 
 	// Des méthodes simple pour
-	public void displayMenuHeader() {
+	private void displayMenuHeader() {
 		logger.info("multi-jeux\n");
 	}
 
-	public void displayGameList() {
+	private void displayGameList() {
 		logger.info("--------------------\n");
 		logger.info("Choisissez un jeu\n");
 		logger.info("1 - Jeu du Plus ou Moins\n");
 		logger.info("2 - Mastermind\n");
 	}
 
-	public void displayModList() {
+	private void displayModList() {
 		logger.info("--------------------\n");
 		logger.info("Choisissez un mode\n");
 		logger.info("1 - Challenger\n");
@@ -77,7 +76,7 @@ public class Menu {
 		logger.info("3 - Duel\n");
 	}
 
-	public void displayEndGameMenu() {
+	private void displayEndGameMenu() {
 		logger.info("--------------------\n");
 		logger.info("Voulez vous :\n");
 		logger.info("1 - Rejouer\n");

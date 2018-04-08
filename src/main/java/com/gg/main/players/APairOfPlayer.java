@@ -13,19 +13,11 @@ public class APairOfPlayer {
 		return player1;
 	}
 
-	public void setPlayer1(Player player1) {
-		this.player1 = player1;
-	}
-
 	public Player getPlayer2() {
 		return player2;
 	}
 
-	public void setPlayer2(Player player2) {
-		this.player2 = player2;
-	}
-
-	// Non utilisé (détruit d'objet)
+	// Deprecated (détruit d'objet)
 	public void reversePlayers() {
 		Player tmp = player1;
 		player1 = player2;

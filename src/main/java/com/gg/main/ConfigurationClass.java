@@ -14,6 +14,15 @@ public class ConfigurationClass {
 //		this.devMod = devMod;
 	}
 	
+	public int getNbTurns() {
+		return this.nbTurns;
+	}
+	public int getSolutionLength() {
+		return this.solutionLength;
+	}
+	public int getNbColors() {
+		return this.nbColors;
+	}
 	private void setNbTurns(int nbTurns) {
 		this.nbTurns = nbTurns;
 	}
@@ -24,13 +33,5 @@ public class ConfigurationClass {
 		this.nbColors = nbColors;
 	}
 	
-	public int getNbTurns() {
-		return this.nbTurns;
-	}
-	public int getSolutionLength() {
-		return this.solutionLength;
-	}
-	public int getNbColors() {
-		return this.nbColors;
-	}
+
 }

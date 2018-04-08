@@ -23,7 +23,7 @@ public abstract class Player {
 	public abstract String play(String reponse);
 	public abstract String toString();
 
-	public String inputErrorCheck(int solutionLength, int nbColors ,SequenceType sequence) {
+	protected String inputErrorCheck(int solutionLength, int nbColors ,SequenceType sequence) {
 		String str = "";
 		while (true) {
 			try {

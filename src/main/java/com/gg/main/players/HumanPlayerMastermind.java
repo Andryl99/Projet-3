@@ -21,18 +21,6 @@ public class HumanPlayerMastermind extends Player {
 		return this.inputErrorCheck(config.getSolutionLength(), config.getNbColors(), SequenceType.ISCOMBINATION);
 	}
 
-	/*
-	 * 
-	 * giveAnswer OU giveMasterMindAnswer
-	 * 			Pas les deux
-	 * 
-	 */
-
-	/*
-	 * 
-	 * TODO Factorisation de code
-	 * 
-	 * */
 	@Override
 	public String giveAnswer(String proposition, String solution) {
 		logger.info("Corrigez la combinaison suivante : " + proposition + "\n");
@@ -42,16 +30,6 @@ public class HumanPlayerMastermind extends Player {
 		areAtRightPlace = this.inputErrorCheck(config.getSolutionLength(), config.getNbColors(), SequenceType.ISMASTERMINDCORRECTION);
 		return arePresents + " " + areAtRightPlace;
 	}
-
-//	public Pair<String, String> giveMastermindAnswer(String proposition, String solution) {
-//		System.out.println("Corrigez la combinaison suivante : " + proposition + "\t\tSolution : " + solution);
-//		System.out.print("Nombre de présents : ");
-//		arePresents = scanner.nextLine();
-//		System.out.print("Nombre de bien placé : ");
-//		areAtRightPlace = scanner.nextLine();
-//		Pair<String, String> pair = new Pair<String, String>(arePresents, areAtRightPlace);
-//		return pair;
-//	}
 
 	@Override
 	public String play(String reponse) {

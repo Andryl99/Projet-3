@@ -24,6 +24,25 @@ public class ConfigurationClassFactory {
 		this.nbColors = "";
 	}
 
+	public ConfigurationClass getConfigurationClass() {
+		loadProperties();
+		// try{
+		// nbColors.isEmpty();
+		// solutionLength.isEmpty();
+		// nbTurns.isEmpty();
+		// } catch (NullPointerException e) {
+		// // Ecriture des valeur par défaut
+		// logger.warn("config.properties looks empty, default values will be writen. e
+		// : " + e.toString() + "\n");
+		// writeProperties("10", "4", "6");
+		// loadProperties();
+		// }
+		config = new ConfigurationClass(Integer.parseInt(nbTurns), Integer.parseInt(solutionLength),
+				Integer.parseInt(nbColors));
+		writeProperties(nbTurns, solutionLength, nbColors);
+		return config;
+	}
+
 	private void writeProperties(String nbTurns, String solutionLength, String nbColors) {
 		Properties prop = new Properties();
 		OutputStream output = null;
@@ -32,7 +51,7 @@ public class ConfigurationClassFactory {
 
 			output = new FileOutputStream("src/main/resources/config.properties");
 
-			// set the properties value
+			// set properties
 			prop.setProperty("nbTurns", nbTurns);
 			prop.setProperty("solutionLength", solutionLength);
 			prop.setProperty("nbColors", nbColors);
@@ -61,14 +80,14 @@ public class ConfigurationClassFactory {
 
 			input = new FileInputStream("src/main/resources/config.properties");
 
-			// load a properties file
+			// chargement du fichier properties
 			prop.load(input);
 
-			// get the property value and print it out
-			nbTurns = prop.getProperty("nbTurns" , "10");
-			solutionLength = prop.getProperty("solutionLength" , "4");
+			// récupération des properties
+			nbTurns = prop.getProperty("nbTurns", "10");
+			solutionLength = prop.getProperty("solutionLength", "4");
 			nbColors = prop.getProperty("nbColors", "6");
-			
+
 		} catch (IOException ex) {
 			logger.fatal(ex.getMessage());
 		} finally {
@@ -80,22 +99,5 @@ public class ConfigurationClassFactory {
 				}
 			}
 		}
-	}
-
-	public ConfigurationClass getConfigurationClass() {
-		loadProperties();
-//		try{
-//			nbColors.isEmpty();
-//			solutionLength.isEmpty(); 
-//			nbTurns.isEmpty();
-//		} catch (NullPointerException e) {
-//			// Ecriture des valeur par défaut
-//			logger.warn("config.properties looks empty, default values will be writen. e : " + e.toString() + "\n");
-//			writeProperties("10", "4", "6");
-//			loadProperties();
-//		}
-		config = new ConfigurationClass(Integer.parseInt(nbTurns),Integer.parseInt(solutionLength),Integer.parseInt(nbColors));
-		writeProperties(nbTurns, solutionLength, nbColors);
-		return config;
 	}
 }
