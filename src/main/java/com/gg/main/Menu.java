@@ -10,7 +10,9 @@ public class Menu {
 
 	static final Logger logger = LogManager.getLogger();
 	
-	public Menu() {	}
+	public Menu() {	
+		displayMenuHeader();
+	}
 
 	public int runGameMenu() {
 		int gameChoice;
@@ -56,6 +58,11 @@ public class Menu {
 		return choix;
 	}
 
+	private void displayMenuHeader() {
+		logger.info("--------------------\n");
+		logger.info("|    Mastermind    |\n");
+		logger.info("|   Plus ou Moins  |\n");
+	}
 	private void displayGameList() {
 		logger.info("--------------------\n");
 		logger.info("Choisissez un jeu\n");

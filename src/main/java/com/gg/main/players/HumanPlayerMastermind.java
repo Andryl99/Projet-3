@@ -36,6 +36,7 @@ public class HumanPlayerMastermind extends Player {
 		logger.info("Proposition : ");
 		return this.inputErrorCheck(config.getSolutionLength(), config.getNbColors(), SequenceType.ISCOMBINATION);
 	}
+	
 	public String toString() {
 		return "joueur humain";
 	}
