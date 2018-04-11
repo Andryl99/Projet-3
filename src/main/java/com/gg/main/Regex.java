@@ -6,7 +6,9 @@ public class Regex {
 
 	public static boolean isValidCombination(String combination, int solutionLength, int nbColors,
 			SequenceType sequence) {
+		
 		String regExp;
+		
 		switch (sequence) {
 		case ISCOMBINATION:
 			regExp = "^[0-" + (nbColors - 1) + "]{" + solutionLength + "}$";

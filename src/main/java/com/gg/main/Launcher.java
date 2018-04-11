@@ -39,7 +39,7 @@ public class Launcher {
 			game.defensorSelectSolution();
 		}
 
-		// On enchaine les tours ...
+		// On enchaine les tours
 		do {
 			for (Game game : gameList) {
 				lastGame = game;
@@ -51,13 +51,13 @@ public class Launcher {
 
 		//
 		switch (lastGame.stateOfGame()) {
-		case AUCUNGAGNANT:
+		case NOWINNER:
 			break;
-		case ATTAQUANTGAGNE:
+		case ATTACKERWIN:
 			logger.info("Le " + lastGame.getAttacker().toString() + " l'emporte en " + lastGame.getTurnCounter()
 					+ " tour(s)!\n");
 			break;
-		case DEFENSEURGAGNE:
+		case DEFENSORWIN:
 			logger.info("Le " + lastGame.getDefensor().toString() + " l'emporte à l'issu du " + lastGame.getTurnCounter()
 			+ "ème tour(s)!\n");
 			break;

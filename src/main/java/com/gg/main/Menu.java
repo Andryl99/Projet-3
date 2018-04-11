@@ -53,7 +53,7 @@ public class Menu {
 			choix = scanner.nextInt();
 
 		} catch (InputMismatchException e) {
-			logger.warn("Erreur de saisie, recommencez\n");
+			logger.warn("Erreur de saisie, recommencez " + e.toString() + "\n");
 		}
 		return choix;
 	}

@@ -24,7 +24,7 @@ Avant la compilation rendez-vous dans
 									
 ## Problèmes connus  
 
-La méthode inspirée de l'algorythme de knuth (IA du mastermind) prend trop de temps a l'execution, son comportement est donc modifié (moins efficace) dès lors qu'un nombre important de couleurs/digits est configuré.
+La méthode inspirée de l'algorythme de Knuth (IA du mastermind) prend trop de temps a l'execution, son comportement est donc modifié (moins efficace) dès lors qu'un nombre important de couleurs/digits est configuré.
 
 ## Historique
 Version 1(Avril 2018)

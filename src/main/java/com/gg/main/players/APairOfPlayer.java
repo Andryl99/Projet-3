@@ -1,6 +1,7 @@
 package com.gg.main.players;
 
 public class APairOfPlayer {
+
 	private Player player1;
 	private Player player2;
 	

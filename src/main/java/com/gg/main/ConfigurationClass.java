@@ -1,6 +1,7 @@
 package com.gg.main;
 
 public class ConfigurationClass {
+
 	private int nbTurns;
 	private int solutionLength;
 	private int nbColors;
@@ -31,6 +32,4 @@ public class ConfigurationClass {
 	private void setNbColors(int nbColors) {
 		this.nbColors = nbColors;
 	}
-	
-
 }

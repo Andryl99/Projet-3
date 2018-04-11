@@ -10,20 +10,25 @@ import com.gg.main.ConfigurationClass;
 import com.gg.main.Regex;
 
 public abstract class Player {
+
 	protected ConfigurationClass config;
 	protected Scanner scanner = new Scanner(System.in);
 	static final Logger logger = LogManager.getLogger();
-	
-	public Player (ConfigurationClass config) {
+
+	public Player(ConfigurationClass config) {
 		this.config = config;
 		this.scanner = new Scanner(System.in);
 	}
+
 	public abstract String selectSolution();
+
 	public abstract String giveAnswer(String proposition, String solution);
+
 	public abstract String play(String reponse);
+
 	public abstract String toString();
 
-	protected String inputErrorCheck(int solutionLength, int nbColors ,SequenceType sequence) {
+	protected String inputErrorCheck(int solutionLength, int nbColors, SequenceType sequence) {
 		String str = "";
 		while (true) {
 			try {

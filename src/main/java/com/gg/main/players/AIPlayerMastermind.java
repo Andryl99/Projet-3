@@ -98,9 +98,8 @@ public class AIPlayerMastermind extends Player {
 		}
 
 		/*
-		 * Creation d'une map du qui associe chiffre et occurence du chiffre [
-		 * 0,1,1,1,2,0] devient l'ensemble (clé,valeur) (0,2)(1,3)(2,1)
-		 * 
+		 * Creation d'une map du qui associe chiffre et occurence du chiffre :
+		 * [0,1,1,1,2,0] devient l'ensemble (clé,valeur) : (0,2)(1,3)(2,1)
 		 */
 		solutionMap = AIPlayerMastermind.createMap(code);
 		propositionMap = AIPlayerMastermind.createMap(guess);
@@ -109,7 +108,6 @@ public class AIPlayerMastermind extends Player {
 		 * On test chaque entrée de la map solution, si on retrouve un chiffre en commun
 		 * on va chercher les valeurs associées on garde la plus petite des deux valeurs
 		 * (qui correspond au nombre de correspondances solution / proposition)
-		 * 
 		 */
 		for (Map.Entry<Character, Integer> entry : solutionMap.entrySet()) {
 			if (propositionMap.containsKey(entry.getKey())) {
@@ -118,17 +116,17 @@ public class AIPlayerMastermind extends Player {
 		}
 
 		/*
-		 * La boucle si dessus nous a renvoyé tout le nombre de chiffre present dans les
-		 * deux solutions, il faut les distingué des valeurs bien placé, déterminée plus
-		 * haut [0,0,0,2] [4,4,0,0] (0,3) (0,2)
+		 * La boucle ci-dessus nous a renvoyé combien de chiffres sont presents dans les
+		 * deux solutions : [0,0,0,2] [4,4,0,0] (0,3) (0,2)
 		 * 
-		 * nombre presents... ... le plus petit des deux valeur 2
+		 * nombre "presents" => la plus petite des deux valeur 2
 		 * 
+		 * Il faut ensuite les distingués des valeurs "bien placé", déterminées plus
+		 * haut
 		 */
 		correct -= wellPlaced;
 
-		str = correct + " " + wellPlaced;
-		return str;
+		return correct + " " + wellPlaced;
 	}
 
 	public String toString() {
@@ -170,18 +168,17 @@ public class AIPlayerMastermind extends Player {
 		return maximum;
 	}
 
-	// methodes de play
 	private void memoryCleaner(String correction) {
 
 		// Cette fonction retire de la Map candidateList l'ensemble des combinaisons qui
-		// ne coincide pas avec la correction si le dernier guess était solution
+		// ne coincident pas avec la correction si le dernier guess était solution
 		for (Iterator<String> iter = candidateList.listIterator(); iter.hasNext();) {
 			String candidateCode = iter.next();
 			if (!matchWithGuess(candidateCode, guess, correction)) {
 				iter.remove();
 			}
 		}
-		// Affichage de la liste
+		// Affichage de la candidateList
 		// System.out.println("**** candidateList ****");
 		// for (String string : candidateList) {
 		// System.out.println(string);
@@ -193,7 +190,7 @@ public class AIPlayerMastermind extends Player {
 	}
 
 	private String makeAStarterGuess() {
-		// On joue toujours 1122, 11222 ou 112222
+		// On joue toujours 1122, 11222 ou 112222 au premier tour
 		guess = "11";
 		for (int i = 2; i < config.getSolutionLength(); i++)
 			guess += "2";
@@ -203,7 +200,7 @@ public class AIPlayerMastermind extends Player {
 	private void makeAGuess() {
 		if (useMinimaxMethod) {
 			// Méthode Minimax
-			resetMapsAndStuff();
+			resetCollections();
 			setMinimumEliminationMap();
 			setPossibleGuessesList();
 			pickTheBestGuess();
@@ -211,8 +208,6 @@ public class AIPlayerMastermind extends Player {
 			// Méthode Random
 			Random random = new Random();
 			guess = candidateList.get(random.nextInt(candidateList.size()));
-			// Une autre méthode consiste à prendre simplement le premier code de la liste
-			// guess = candidateList.get(0);
 		}
 	}
 
@@ -228,13 +223,13 @@ public class AIPlayerMastermind extends Player {
 				}
 		pegsList.remove("0 " + config.getSolutionLength());
 
-		// affiche pegs liste
+		// affiche pegslist
 		// for (String string : pegsList) {
 		// System.out.println(string);
 		// }
 	}
 
-	private void resetMapsAndStuff() {
+	private void resetCollections() {
 		minimumEliminationMap.clear();
 		possibleGuessesList.clear();
 	}
@@ -245,6 +240,9 @@ public class AIPlayerMastermind extends Player {
 		ArrayList<Integer> listOfAmounts = new ArrayList<Integer>();
 		// suppression du dernier guess
 		fullCodeList.remove(guess);
+		/*
+		 * Application de la méthode du minimax
+		 */
 		for (String code : fullCodeList) {
 			for (String pegs : pegsList) {
 				amountOfElimitatedCodes = 0;
@@ -261,15 +259,16 @@ public class AIPlayerMastermind extends Player {
 	}
 
 	private void setPossibleGuessesList() {
+		
 		int minimax = 0;
+		
 		ArrayList<Integer> minimumEliminationList = new ArrayList<Integer>();
 
-		for (Map.Entry<String, Integer> entry : minimumEliminationMap.entrySet()) {
-			// System.out.println(entry.getKey() + "/" + entry.getValue());
-			minimumEliminationList.add(entry.getValue());
-		}
-		// minimumEliminationSet = new
-		// ArrayList<Integer>(minimumEliminationMap.values());
+		// Affichage de la map Code / Nombre de codes candidats éliminés minimum
+		// for (Map.Entry<String, Integer> entry : minimumEliminationMap.entrySet()) {
+		//  System.out.println(entry.getKey() + "/" + entry.getValue());
+		// }
+		 minimumEliminationList = new ArrayList<Integer>(minimumEliminationMap.values());
 
 		minimax = getTheBigger(minimumEliminationList);
 
@@ -284,19 +283,22 @@ public class AIPlayerMastermind extends Player {
 		for (String code : possibleGuessesList) {
 			if (candidateList.contains(code)) {
 				bestGuessesList.add(code);
+				// Affiche si le prochain code appartient a la candidateList
 				// System.out.println("a solution from the candidate list will be played");
 			}
 		}
 		if (bestGuessesList.isEmpty()) {
 			bestGuessesList = new ArrayList<String>(possibleGuessesList);
+			// Affiche le cas contraire
 			// System.out.println("a solution from full code list will be played");
 		}
 
-		// System.out.println("**** possibleList ****");
+		// Affichage de deux listes :
+		// System.out.println("**** possibleGuessesList ****");
 		// for (String string : possibleGuessesList) {
 		// System.out.println(string);
 		// }
-		// System.out.println("**** minimaxedList ****");
+		// System.out.println("**** bestGuessesList ****");
 		// for (String string : bestGuessesList) {
 		// System.out.println(string);
 		// }

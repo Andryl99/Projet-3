@@ -22,7 +22,21 @@ public class GameFactory {
 		this.playerFactory = new PlayerFactory(config);
 	}
 
-	public Game getGame(int gameChoice, int modChoice, boolean reverserFlag) throws IllegalArgumentException {
+	// Je me sert d'un booleen pour donner une valeur au reserveFlag et modifier la
+	// création des joueurs.
+	public List<Game> getAListOfGames(int gameChoice, int modChoice) {
+		List<Game> listOfGames = new ArrayList<Game>();
+		try {
+			listOfGames.add(getGame(gameChoice, modChoice, false));
+			if (modChoice == 3)
+				listOfGames.add(getGame(gameChoice, modChoice, true));
+		} catch (IllegalArgumentException e) {
+			logger.fatal(e.toString());
+		}
+		return listOfGames;
+	}
+
+	private Game getGame(int gameChoice, int modChoice, boolean reverserFlag) throws IllegalArgumentException {
 
 		// On leve une possible exception a la creation des joueurs
 		try {
@@ -50,17 +64,4 @@ public class GameFactory {
 		}
 	}
 
-	// Je me sert d'un booleen pour donner une valeur au reserveFlag et modifier la
-	// création des joueurs.
-	public List<Game> getAListOfGames(int gameChoice, int modChoice) {
-		List<Game> listOfGames = new ArrayList<Game>();
-		try {
-			listOfGames.add(getGame(gameChoice, modChoice, false));
-			if (modChoice == 3)
-				listOfGames.add(getGame(gameChoice, modChoice, true));
-		} catch (IllegalArgumentException e) {
-			logger.fatal(e.toString());
-		}
-		return listOfGames;
-	}
 }

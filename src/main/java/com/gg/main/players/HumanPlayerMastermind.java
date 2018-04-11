@@ -8,8 +8,8 @@ import com.gg.main.ConfigurationClass;
 public class HumanPlayerMastermind extends Player {
 
 	static Logger logger = LogManager.getLogger();
-	protected String arePresents;
-	protected String areAtRightPlace;
+	protected String correct;
+	protected String wellPlaced;
 
 	public HumanPlayerMastermind(ConfigurationClass config) {
 		super(config);
@@ -25,10 +25,10 @@ public class HumanPlayerMastermind extends Player {
 	public String giveAnswer(String proposition, String solution) {
 		logger.info("Corrigez la combinaison suivante : " + proposition + "\n");
 		logger.info("Correcte(s)   : ");
-		arePresents = this.inputErrorCheck(config.getSolutionLength(), config.getNbColors(), SequenceType.ISMASTERMINDCORRECTION);
+		correct = this.inputErrorCheck(config.getSolutionLength(), config.getNbColors(), SequenceType.ISMASTERMINDCORRECTION);
 		logger.info("Bien placé(s) : ");
-		areAtRightPlace = this.inputErrorCheck(config.getSolutionLength(), config.getNbColors(), SequenceType.ISMASTERMINDCORRECTION);
-		return arePresents + " " + areAtRightPlace;
+		wellPlaced = this.inputErrorCheck(config.getSolutionLength(), config.getNbColors(), SequenceType.ISMASTERMINDCORRECTION);
+		return correct + " " + wellPlaced;
 	}
 
 	@Override

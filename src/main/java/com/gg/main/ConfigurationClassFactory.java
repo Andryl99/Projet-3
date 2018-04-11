@@ -62,6 +62,7 @@ public class ConfigurationClassFactory {
 	}
 
 	private void loadProperties() {
+
 		Properties prop = new Properties();
 		InputStream input = null;
 

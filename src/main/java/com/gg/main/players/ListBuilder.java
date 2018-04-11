@@ -6,7 +6,6 @@ import com.gg.main.ConfigurationClass;
 
 public class ListBuilder {
 
-
 		private ArrayList<String> candidateList;
 
 		public ListBuilder(ConfigurationClass config) {
