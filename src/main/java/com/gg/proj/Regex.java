@@ -1,6 +1,6 @@
-package com.gg.main;
+package com.gg.proj;
 
-import com.gg.main.players.SequenceType;
+import com.gg.proj.players.SequenceType;
 
 public class Regex {
 

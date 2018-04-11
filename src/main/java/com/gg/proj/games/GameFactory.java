@@ -1,4 +1,4 @@
-package com.gg.main.games;
+package com.gg.proj.games;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.gg.main.ConfigurationClass;
-import com.gg.main.players.APairOfPlayer;
-import com.gg.main.players.PlayerFactory;
+import com.gg.proj.ConfigurationClass;
+import com.gg.proj.players.APairOfPlayer;
+import com.gg.proj.players.PlayerFactory;
 
 public class GameFactory {
 

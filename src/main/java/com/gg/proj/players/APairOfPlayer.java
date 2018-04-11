@@ -1,4 +1,4 @@
-package com.gg.main.players;
+package com.gg.proj.players;
 
 public class APairOfPlayer {
 

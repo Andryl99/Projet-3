@@ -1,9 +1,9 @@
-package com.gg.main.players;
+package com.gg.proj.players;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.gg.main.ConfigurationClass;
+import com.gg.proj.ConfigurationClass;
 
 public class HumanPlayerMastermind extends Player {
 

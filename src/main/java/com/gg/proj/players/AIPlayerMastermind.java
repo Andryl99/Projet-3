@@ -1,4 +1,4 @@
-package com.gg.main.players;
+package com.gg.proj.players;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.Random;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.gg.main.ConfigurationClass;
+import com.gg.proj.ConfigurationClass;
 
 public class AIPlayerMastermind extends Player {
 

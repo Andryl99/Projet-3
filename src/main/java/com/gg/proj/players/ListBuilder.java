@@ -1,8 +1,8 @@
-package com.gg.main.players;
+package com.gg.proj.players;
 
 import java.util.ArrayList;
 
-import com.gg.main.ConfigurationClass;
+import com.gg.proj.ConfigurationClass;
 
 public class ListBuilder {
 

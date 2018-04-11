@@ -1,11 +1,11 @@
-package com.gg.main.games;
+package com.gg.proj.games;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.gg.main.players.AIPlayerMoreLess;
-import com.gg.main.players.HumanPlayerMoreLess;
-import com.gg.main.players.Player;
+import com.gg.proj.players.AIPlayerMoreLess;
+import com.gg.proj.players.HumanPlayerMoreLess;
+import com.gg.proj.players.Player;
 
 public class MoreLessGame extends Game {
 

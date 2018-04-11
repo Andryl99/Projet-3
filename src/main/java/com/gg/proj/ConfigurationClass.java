@@ -1,4 +1,4 @@
-package com.gg.main;
+package com.gg.proj;
 
 public class ConfigurationClass {
 

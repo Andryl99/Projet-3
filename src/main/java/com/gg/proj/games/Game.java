@@ -1,6 +1,6 @@
-package com.gg.main.games;
-import com.gg.main.EndGameState;
-import com.gg.main.players.Player;
+package com.gg.proj.games;
+import com.gg.proj.EndGameState;
+import com.gg.proj.players.Player;
 
 public abstract class Game {
 

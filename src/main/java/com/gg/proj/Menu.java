@@ -1,4 +1,4 @@
-package com.gg.main;
+package com.gg.proj;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -9,8 +9,8 @@ import org.apache.logging.log4j.Logger;
 public class Menu {
 
 	static final Logger logger = LogManager.getLogger();
-	
-	public Menu() {	
+
+	public Menu() {
 		displayMenuHeader();
 	}
 
@@ -23,7 +23,7 @@ public class Menu {
 		} while (gameChoice < 1 || gameChoice > 2);
 		return gameChoice;
 	}
-	
+
 	public int runModMenu() {
 		int modChoice;
 		// Choix du mode de jeu
@@ -33,7 +33,7 @@ public class Menu {
 		} while (modChoice < 1 || modChoice > 3);
 		return modChoice;
 	}
-	
+
 	public int runEndGameMenu() {
 		int endGameChoice;
 		do {
@@ -42,19 +42,22 @@ public class Menu {
 		} while (endGameChoice < 1 || endGameChoice > 3);
 		return endGameChoice;
 	}
-	
-	private int intInput() {
-		// ne pas quiiter la  méthode tant que le choix est -1
-		int choix = -1;
-		logger.info("Choix : ");
-		@SuppressWarnings("resource")
-		Scanner scanner = new Scanner(System.in);
-		try {
-			choix = scanner.nextInt();
 
-		} catch (InputMismatchException e) {
-			logger.warn("Erreur de saisie, recommencez " + e.toString() + "\n");
-		}
+	private int intInput() {
+		
+		int choix = -1;
+		
+		do {
+			logger.info("Choix : ");
+			@SuppressWarnings("resource")
+			Scanner scanner = new Scanner(System.in);
+			try {
+				choix = scanner.nextInt();
+
+			} catch (InputMismatchException e) {
+				logger.warn("Erreur de saisie, recommencez\n");
+			}
+		} while (choix == -1);
 		return choix;
 	}
 
@@ -63,6 +66,7 @@ public class Menu {
 		logger.info("|    Mastermind    |\n");
 		logger.info("|   Plus ou Moins  |\n");
 	}
+
 	private void displayGameList() {
 		logger.info("--------------------\n");
 		logger.info("Choisissez un jeu\n");

@@ -1,11 +1,11 @@
-package com.gg.main.games;
+package com.gg.proj.games;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.gg.main.players.AIPlayerMastermind;
-import com.gg.main.players.HumanPlayerMastermind;
-import com.gg.main.players.Player;
+import com.gg.proj.players.AIPlayerMastermind;
+import com.gg.proj.players.HumanPlayerMastermind;
+import com.gg.proj.players.Player;
 
 public class Mastermind extends Game {
 
