@@ -33,20 +33,17 @@ public class ConfigurationClassFactory {
 	}
 
 	private void writeProperties(String nbTurns, String solutionLength, String nbColors) {
-		Properties prop = new Properties();
+		Properties properties = new Properties();
 		OutputStream output = null;
 
 		try {
 
 			output = new FileOutputStream("src/main/resources/config.properties");
 
-			// set properties
-			prop.setProperty("nbTurns", nbTurns);
-			prop.setProperty("solutionLength", solutionLength);
-			prop.setProperty("nbColors", nbColors);
-
-			// save properties
-			prop.store(output, null);
+			properties.setProperty("nbTurns", nbTurns);
+			properties.setProperty("solutionLength", solutionLength);
+			properties.setProperty("nbColors", nbColors);
+			properties.store(output, null);
 
 		} catch (IOException io) {
 			logger.fatal(io.getMessage());
@@ -63,7 +60,7 @@ public class ConfigurationClassFactory {
 
 	private void loadProperties() {
 
-		Properties prop = new Properties();
+		Properties properties = new Properties();
 		InputStream input = null;
 
 		try {
@@ -71,12 +68,12 @@ public class ConfigurationClassFactory {
 			input = new FileInputStream("src/main/resources/config.properties");
 
 			// chargement du fichier properties
-			prop.load(input);
+			properties.load(input);
 
 			// récupération des properties
-			nbTurns = prop.getProperty("nbTurns", "10");
-			solutionLength = prop.getProperty("solutionLength", "4");
-			nbColors = prop.getProperty("nbColors", "6");
+			nbTurns = properties.getProperty("nbTurns", "10");
+			solutionLength = properties.getProperty("solutionLength", "4");
+			nbColors = properties.getProperty("nbColors", "6");
 
 		} catch (IOException ex) {
 			logger.fatal(ex.getMessage());

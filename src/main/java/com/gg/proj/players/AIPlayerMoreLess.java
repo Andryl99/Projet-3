@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.gg.proj.ConfigurationClass;
+import com.gg.proj.games.MoreLessGame;
 
 public class AIPlayerMoreLess extends Player {
 
@@ -46,7 +47,7 @@ public class AIPlayerMoreLess extends Player {
 
 	@Override
 	public String giveAnswer(String proposition, String solution) {
-		String correction = AIPlayerMoreLess.Corrector(proposition, solution);
+		String correction = MoreLessGame.Corrector(proposition, solution);
 		logger.info("Correction : " + correction + "\n");
 		return correction;
 	}
@@ -88,26 +89,7 @@ public class AIPlayerMoreLess extends Player {
 		return proposition;
 	}
 
-	public static String Corrector(String guess, String code) {
-		int digitProp;
-		int digitSol;
-		String verification = "";
 
-		for (int i = 0; i < guess.length(); i++) {
-
-			digitProp = Integer.parseInt(String.valueOf(guess.charAt(i)));
-			digitSol = Integer.parseInt(String.valueOf(code.charAt(i)));
-
-			if (digitProp == digitSol)
-				verification += "=";
-			else if (digitProp < digitSol)
-				verification += "+";
-			else if (digitProp > digitSol)
-				verification += "-";
-		}
-
-		return verification;
-	}
 
 	public String toString() {
 		return "joueur AI";
