@@ -20,6 +20,8 @@ Avant la compilation rendez-vous dans
 	Project -> Properties -> Java compiler ->  
 									Cochez Enabled project specific settings  
 									Dans Compiler compliance level, selectionnez '1.8'  
+									
+Le mode developpeur est accecible via la commande "dev".
 
 									
 ## Problèmes connus  
