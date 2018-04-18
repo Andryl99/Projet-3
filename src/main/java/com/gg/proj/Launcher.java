@@ -39,11 +39,11 @@ public class Launcher {
 			game.defensorSelectSolution();
 		}
 
-		// On enchaine les tours
+		// On enchaine les tours (nextTurn)
 		do {
 			for (Game game : gameList) {
 				lastGame = game;
-				isLastTurn = game.nextTurn();
+				isLastTurn = game.nextTurn();  
 				if (isLastTurn)
 					break;
 			}

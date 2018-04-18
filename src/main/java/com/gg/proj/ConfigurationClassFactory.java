@@ -1,6 +1,7 @@
 package com.gg.proj;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,8 +46,10 @@ public class ConfigurationClassFactory {
 			properties.setProperty("nbColors", nbColors);
 			properties.store(output, null);
 
-		} catch (IOException io) {
-			logger.fatal(io.getMessage());
+		} catch (FileNotFoundException e) {
+			logger.warn(e.getMessage());
+		}  catch (IOException e) {
+			logger.fatal(e.getMessage());
 		} finally {
 			if (output != null) {
 				try {
@@ -74,9 +77,10 @@ public class ConfigurationClassFactory {
 			nbTurns = properties.getProperty("nbTurns", "10");
 			solutionLength = properties.getProperty("solutionLength", "4");
 			nbColors = properties.getProperty("nbColors", "6");
-
-		} catch (IOException ex) {
-			logger.fatal(ex.getMessage());
+		} catch (FileNotFoundException e) {
+			logger.warn(e.getMessage());
+		} catch (IOException e) {
+			logger.fatal(e.getMessage());
 		} finally {
 			if (input != null) {
 				try {

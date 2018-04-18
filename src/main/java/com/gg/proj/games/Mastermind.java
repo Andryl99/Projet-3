@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.gg.proj.players.AIPlayerMastermind;
 import com.gg.proj.players.HumanPlayerMastermind;
 import com.gg.proj.players.Player;
 
@@ -16,6 +15,9 @@ public class Mastermind extends Game {
 	
 	public Mastermind(int nbTurns, int solutionLength, int nbColors, Player attacker, Player defensor) {
 		super(nbTurns, solutionLength, attacker, defensor);
+		this.solution = "";
+		this.answer = "";
+		this.proposition = "";
 	}
 
 	@Override

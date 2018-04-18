@@ -41,8 +41,6 @@ public class Main {
 		Launcher launcher = new Launcher(devMod);
 
 		do {
-			// try catch illegal argument exception
-			// utiliser e.getMessage();
 			gameChoice = menu.runGameMenu();
 			modChoice = menu.runModMenu();
 			do {
