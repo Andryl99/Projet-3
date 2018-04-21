@@ -21,7 +21,7 @@ Avant la compilation rendez-vous dans
 									Cochez Enabled project specific settings  
 									Dans Compiler compliance level, selectionnez '1.8'  
 									
-Le mode developpeur est accecible via la commande "dev".
+Le mode développeur est accécible via la commande "dev".
 
 									
 ## Problèmes connus  

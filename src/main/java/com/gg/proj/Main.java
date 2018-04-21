@@ -32,7 +32,7 @@ public class Main {
 					devMod = true;
 					logger.info("Le mode développeur est activé\n");
 				} else
-					throw new IllegalAnnotationException("L'argument doit etre \"dev\"");
+					throw new IllegalArgumentException("L'argument doit etre \"dev\"");
 			} catch (IllegalArgumentException e) {
 				logger.error(e.getMessage());
 			}

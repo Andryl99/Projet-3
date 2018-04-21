@@ -46,9 +46,11 @@ public class ConfigurationClassFactory {
 			properties.setProperty("nbColors", nbColors);
 			properties.store(output, null);
 
-		} catch (FileNotFoundException e) {
+		} // exception générée par FileOutputStream 
+		catch (FileNotFoundException e) {
 			logger.warn(e.getMessage());
-		}  catch (IOException e) {
+		} // exception générée par porperties.store
+		catch (IOException e) {
 			logger.fatal(e.getMessage());
 		} finally {
 			if (output != null) {
