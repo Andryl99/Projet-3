@@ -1,5 +1,4 @@
 package com.gg.proj.games;
-import com.gg.proj.EndGameState;
 import com.gg.proj.players.Player;
 
 public abstract class Game {

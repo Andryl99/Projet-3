@@ -52,7 +52,7 @@ public class Launcher {
 		//
 		switch (lastGame.stateOfGame()) {
 		case NOWINNER:
-			break;
+			logger.error("Aucun gagnant n'a été déterminé");
 		case ATTACKERWIN:
 			logger.info("Le " + lastGame.getAttacker().toString() + " l'emporte en " + lastGame.getTurnCounter()
 					+ " tour(s)!\n");
@@ -62,7 +62,7 @@ public class Launcher {
 			+ "ème tour(s)!\n");
 			break;
 		default:
-			break;
+			logger.error("Erreur dans stateOfGame");
 		}
 	}
 }

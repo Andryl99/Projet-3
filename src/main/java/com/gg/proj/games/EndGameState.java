@@ -1,4 +1,4 @@
-package com.gg.proj;
+package com.gg.proj.games;
 
 public enum EndGameState {
 
